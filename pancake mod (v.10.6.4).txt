@@ -13,6 +13,9 @@
 // @grant        none
 // @namespace    https://greasyfork.org/en/users/752105-w4it
 // ==/UserScript==
+//          Share scripts server:  https://discord.gg/HabBEraybj
+//          Share scripts server:  https://discord.gg/HabBEraybj
+//          Share scripts server:  https://discord.gg/HabBEraybj
 let AUTHOR = "W4IT"
 
 if(AUTHOR[1] == "4"){
