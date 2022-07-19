@@ -1,0 +1,1402 @@
+// ==UserScript==
+// @name         Mouse Mod
+// @namespace    http://tampermonkey.net/
+// @version      0.711.1-priv
+// @description  Mouse
+// @author       ▄︻デW4IT?̷══━一#1814
+// @match        *://*.moomoo.io/*
+// @require      https://code.jquery.com/jquery-3.3.1.slim.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js
+// @require      http://code.jquery.com/jquery-3.3.1.min.js
+// @require      https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
+// @require      https://cdn.jsdelivr.net/npm/fontfaceobserver@2.1.0/fontfaceobserver.standalone.min.js
+// @grant        none
+// ==/UserScript==
+/*
+Changelog:
+*priv version(s)*
+v0.1 Basic Code
+v0.2 added hotkeys
+v0.3 beta anti
+v0.4 added autoMill, insta, auto bulltick
+v0.5 hat macro
+v0.51 added autoaim
+v0.6 added menu
+v0.61 changed look of menu
+v0.62 added ping display
+v0.63 removed one bull tick, changed way to euqip biome hat
+v0.64 added auto-replace
+v0.641 added ping display(finally)
+v0.65 added autobuy(enable in menu)
+v0.7 added anti-trap & autobreak
+v0.71 added lil details menu for traped and anti
+v0.72.0 added construct for auto-place(console.log)
+v0.73.0 added auto-place(beta)
+v0.73.1 fixed auto-place
+v0.74.0 added selectors to costumize auto-place wich dont work (add more customization)
+v0.75.0 removed anti (the var)
+v0.76.0 added shame count ([GG]Gamer Credits, skidded it)
+v0.77.0 added click bull/tank
+v0.78.0 fixed click bull/tank, changed heal a bit, (maybe) chnaged/fixed autobreak, fixed (maybe) insta
+v0.79.0 added reverse(Y)(idk if works)
+v0.710.0 added new tab to menu: KeyStrokes; add function to it soon, improved menu a bit
+v0.711.0 made the optimazion thing for autoplace working(only traps)
+v0.711.1 fixed clown end timer thing
+v0.712.0 maybe improved autoplace? //if < 80 no traps, if intrap, no placing
+
+*official vesrion
+*/
+let details = document.createElement("div");
+details.id = "details";
+document.body.prepend(details);
+var ping = document.getElementById("pingDisplay");
+ping.replaceWith(document.createElement("a"));
+ping.style.fontSize = "12px";
+ping.style.display = "block";
+ping.style.zIndex = "1";
+document.body.appendChild(ping);
+setInterval(function() {
+    if (window.pingTime && ping) {
+        ping.innerHTML = "Ping: " + window.pingTime + " | " + (myPlayer.hat == 45 ? "ShameTimer-[" + shameTime / 1e3 + "s]" : "ShameCount-[" + shame + "]");
+    }
+}, window.pingTime ? 0 : 1e3); //Credits to [GG]GAMER (skidded shaem counter)
+CanvasRenderingContext2D.prototype.rotatef = CanvasRenderingContext2D.prototype.rotate;
+CanvasRenderingContext2D.prototype.rotate = function(e) {
+    if (Math.abs(e) > 1e300) {
+        e = Math.atan2(Math.cos(e), Math.sin(e));
+        this.globalAlpha = 0.5;
+        this.rotatef(e);
+    } else {
+        this.rotatef(e);
+    }
+};
+let HP = 100;
+let gameTick = 0;
+let lastDamageTick = 0;
+var shame = 0;
+let shameTime,
+    damageTimes = 0;
+let startRes = setInterval(() => {
+    window.follmoo && (window.follmoo(), clearInterval(startRes));
+}, 10);
+document.getElementById("enterGame").addEventListener("click", removeCookie);
+
+function removeCookie() {
+    $("#ot-sdk-btn-floating").hide();
+}
+document.getElementById("promoImgHolder").remove();
+document.querySelector("#pre-content-container").remove();
+document.querySelector("#loadingText").innerHTML = '<progress style="width: 300px;"></progress>'; //idk why
+document.getElementById("linksContainer2").innerHTML = '<a class="anchor" target="blank" href="https://www.youtube.com/channel/UC4Ggzj-zMcqxaTMK5RpuzQg">My YouTube</a> | <a class="anchor" target="blank" href="https://discord.gg/MZGRp22JCM/">My Discord Server</a>';
+$("#adCard").remove();
+$("#youtuberOf").remove();
+document.getElementById("moomooio_728x90_home").style.display = "none";
+$("#moomooio_728x90_home").parent().css({
+    display: "none"
+});
+setInterval(() => {
+    if (traped) {
+        if (secondary == 10) {
+            s(["5", [secondary, true]]);
+        } else {
+            s(["5", [primary, true]]);
+        }
+        aim(trapCord.x - myPlayer.x + window.innerWidth / 2, trapCord.y - myPlayer.y + window.innerHeight / 2);
+        s(["c", [1]]);
+        s(["13c", [0, 40, 0]]);
+        s(["13c", [0, 21, 1]]);
+    }
+}, 100);
+setInterval(function() {
+    if (autoaim) {
+        s(["2", [nearestEnemyAngle]]);
+    }
+    if (autoaim2) {
+        aim(nearestEnemy[1] - myPlayer.x + window.innerWidth / 2, nearestEnemy[2] - myPlayer.y + window.innerHeight / 2);
+    }
+}, 90);
+setInterval(function() {
+    if (oldbuyHat != normalHat) {
+        hat(normalHat);
+    }
+    if (oldAcc != normalAcc) {
+        acc(normalAcc);
+    }
+    oldbuyHat = normalHat;
+    oldAcc = normalAcc;
+}, 100);
+
+function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+        let i = 0;
+        let arr2 = Array(arr.length);
+        for (; i < arr.length; i++) {
+            arr2[i] = arr[i];
+        }
+        return arr2;
+    } else {
+        return Array.from(arr);
+    }
+}
+
+function normal() {
+    hat(normalHat);
+    acc(normalAcc);
+}
+
+function aim(x, y) {
+    let target = document.getElementById("gameCanvas");
+    target.dispatchEvent(new MouseEvent("mousemove", {
+        clientX: x,
+        clientY: y,
+    }));
+}
+
+function bullTick() {
+    s(["13c", [0, 7, 0]]);
+    setTimeout(() => {
+        s(["13c", [0, 6, 0]]);
+    }, 2800);
+}
+
+function biomeHat() {
+    if (myPlayer.y < 2400) {
+        hat(15);
+    } else {
+        if (myPlayer.y > 6850 && myPlayer.y < 7550) {
+            hat(31);
+        } else {
+            hat(6);
+        }
+    }
+    acc(11);
+}
+setInterval(() => {
+    if (shame > 3) {
+        bullTick();
+    }
+}, 500);
+setInterval(function() {
+    if (autoprim) {
+        s(["5", [primary, true]]);
+    }
+    if (autosec) {
+        s(["5", [secondary, true]]);
+    }
+}, 0);
+
+function s(data) {
+    ws.send(new Uint8Array(Array.from(msgpack5.encode(data))));
+}
+
+function ch(e) {
+    s(["ch", [e]]);
+}
+
+function hat(id) {
+    if (document.getElementById("aBuy").checked) {
+        s(["13c", [1, id, 0]]);
+    }
+    s(["13c", [0, id, 0]]);
+}
+
+function acc(id) {
+    if (document.getElementById("aBuy").checked) {
+        s(["13c", [1, id, 1]]);
+    }
+    s(["13c", [0, id, 1]]);
+}
+
+function place(id) {
+    let angle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Math.atan2(mouseY - h / 2, mouseX - w / 2);
+    s(["5", [id, null]]);
+    s(["c", [1, angle]]);
+    s(["c", [0, angle]]);
+    s(["5", [myPlayer.weapon, true]]);
+    s(["5", [id, null]]);
+    s(["c", [1, angle]]);
+    s(["c", [0, angle]]);
+    s(["5", [myPlayer.weapon, true]]);
+}
+let myTraps = [];
+let trapID = null;
+let trapX = null;
+let trapY = null;
+let autoprim = false,
+    autosec = false;
+let lhat, lacc;
+let myPlayeroldx;
+let myPlayeroldy;
+let automillx = 10;
+let automilly = 10;
+let autoMill = false;
+let mouseX = void 0;
+let mouseY = void 0;
+let w = void 0;
+let h = void 0;
+let start = null;
+let inInsta = false;
+let nearestEnemy, nearestEnemyAngle, isEnemyNear, enemiesNear;
+let primary, secondary;
+let foodType, spikeType, millType, boostType, turretType, spawnType;
+let autoaim = false;
+let autoaim2 = false;
+let oldbuyHat, oldAcc;
+let normalHat, normalAcc;
+let ws;
+let msgpack5 = msgpack;
+let myPlayer = {
+    id: null,
+    x: null,
+    y: null,
+    dir: null,
+    object: null,
+    weapon: null,
+    clan: null,
+    isLeader: null,
+    hat: null,
+    accessory: null,
+    isSkull: null,
+};
+var spiking = false;
+var boostPlaced = false;
+var spikePlaced = false;
+var boostAlrPlaced = false;
+var spikeAlrPlaced = false;
+let trap = null;
+let traped = false;
+let trapid = null;
+let trapCord = {
+    x: null,
+    y: null,
+};
+
+function placedBoost() {
+    boostPlaced = true;
+    boostAlrPlaced = true;
+    //console.log("boost: " + boostPlaced, boostAlrPlaced);
+    setTimeout(() => {
+        boostPlaced = false;
+        boostAlrPlaced = false;
+        //console.log("boost: " + boostPlaced, boostAlrPlaced);
+    }, 700);
+}
+
+function placedSpike() {
+    spikePlaced = true;
+    spikeAlrPlaced = true;
+    //console.log("spike: " + spikePlaced, spikeAlrPlaced);
+    setTimeout(() => {
+        spikePlaced = false;
+        spikeAlrPlaced = false;
+        //console.log("spike: " + spikePlaced, spikeAlrPlaced);
+    }, 550);
+}
+document.msgpack = msgpack;
+
+function n() {
+    this.buffer = new Uint8Array([0]);
+    this.buffer.__proto__ = new Uint8Array();
+    this.type = 0;
+}
+WebSocket.prototype.oldSend = WebSocket.prototype.send;
+WebSocket.prototype.send = function(data) {
+    if (!ws) {
+        document.ws = this;
+        ws = this;
+        socketFound(this);
+    }
+    this.oldSend(data);
+};
+
+function socketFound(socket) {
+    socket.addEventListener("message", function(data) {
+        handleMessage(data);
+    });
+}
+
+function handleMessage(_x17) {
+    let b = msgpack5.decode(new Uint8Array(_x17.data));
+    let data = void 0;
+    if (b.length > 1) {
+        data = [b[0]].concat(_toConsumableArray(b[1]));
+        if (data[1] instanceof Array) {
+            data = data;
+        }
+    } else {
+        data = b;
+    }
+    let i = data[0];
+    if (!data) {
+        return;
+    }
+    if (i === "io-init") {
+        let docElem = document.getElementById("gameCanvas");
+        w = docElem.clientw;
+        h = docElem.clienth;
+        $(window).resize(function() {
+            w = docElem.clientw;
+            h = docElem.clienth;
+        });
+        docElem.addEventListener("mousemove", function(res) {
+            mouseX = res.clientX;
+            mouseY = res.clientY;
+        });
+    }
+    if (automillx == false) {
+        automillx = myPlayer.x;
+    }
+    if (automilly == false) {
+        automilly = myPlayer.y;
+    }
+    if (myPlayeroldy != myPlayer.y || myPlayeroldx != myPlayer.x) {
+        if (autoMill == true) {
+            if (Math.sqrt(Math.pow(myPlayer.y - automilly, 2) + Math.pow(myPlayer.x - automillx, 2)) > 100) {
+                place(millType, Math.atan2(myPlayeroldy - myPlayer.y, myPlayeroldx - myPlayer.x) + toRad(0xe54324dc82 + 78));
+                place(millType, Math.atan2(myPlayeroldy - myPlayer.y, myPlayeroldx - myPlayer.x) - toRad(0xe54324dc82 + 78));
+                place(millType, Math.atan2(myPlayeroldy - myPlayer.y, myPlayeroldx - myPlayer.x) - toRad(0xe54324dc82 + 0));
+                s(["2", [Math.atan2(mouseY - h / 2, mouseX - w / 2)]]);
+                automillx = myPlayer.x;
+                automilly = myPlayer.y;
+            }
+        }
+        myPlayeroldx = myPlayer.x;
+        myPlayeroldy = myPlayer.y;
+    }
+    if (i == "1" && myPlayer.id == null) {
+        myPlayer.id = data[1];
+    }
+    if (myPlayer.hat == 45 && shame) shameTime = 3e4;
+    if (myPlayer.hat == 45 && shame) shame = 0;
+    if (data[0] == "33") {
+        gameTick++;
+    }
+    if (i == "h" && data[1] == myPlayer.id && data[2] < 1)
+        (gameTick = 0),
+            (lastDamageTick = 0),
+            (shame = 0),
+            (HP = 100),
+            (shameTime = 0);
+    if (i == "h" && data[1] == myPlayer.id) {
+        let damage = HP - data[2];
+        HP = data[2];
+        if (damage <= -1) {
+            damageTimes++;
+            if (!lastDamageTick) return;
+            let healTime = gameTick - lastDamageTick;
+            lastDamageTick = 0;
+            if (healTime <= 1) {
+                shame++;
+            } else {
+                shame = Math.max(0, shame - 2);
+            }
+        } else {
+            lastDamageTick = gameTick;
+        }
+    }
+    if (i == "33") {
+        enemiesNear = [];
+        let f = 0;
+        for (; f < data[1].length / 13; f++) {
+            let object = data[1].slice(13 * f, 13 * f + 13);
+            if (object[0] == myPlayer.id) {
+                myPlayer.x = object[1];
+                myPlayer.y = object[2];
+                myPlayer.dir = object[3];
+                myPlayer.object = object[4];
+                myPlayer.weapon = object[5];
+                myPlayer.clan = object[7];
+                myPlayer.isLeader = object[8];
+                myPlayer.hat = object[9];
+                myPlayer.accessory = object[10];
+                myPlayer.isSkull = object[11];
+            } else if (object[7] != myPlayer.clan || object[7] === null) {
+                enemiesNear.push(object);
+            }
+        }
+    }
+    isEnemyNear = ![];
+    if (enemiesNear) {
+        nearestEnemy = enemiesNear.sort(function(line, i) {
+            return dist(line, myPlayer) - dist(i, myPlayer);
+        })[0];
+    }
+    if (nearestEnemy) {
+        nearestEnemyAngle = Math.atan2(nearestEnemy[2] - myPlayer.y, nearestEnemy[1] - myPlayer.x);
+        if (Math.sqrt(Math.pow(myPlayer.y - nearestEnemy[2], 2) + Math.pow(myPlayer.x - nearestEnemy[1], 2)) < 200) {
+            isEnemyNear = true;
+            if (inInsta == false) {
+                if (!myPlayer.hat == 31) {
+                    normalHat = 6;
+                    console.log("fish");
+                }
+                if (primary != 8) {
+                    normalAcc = 21;
+                }
+            }
+        }
+    }
+    if (nearestEnemy) {
+        if (document.getElementById("ap").checked && !traped) {
+            if (Math.sqrt(Math.pow(myPlayer.y - nearestEnemy[2], 2) + Math.pow(myPlayer.x - nearestEnemy[1], 2)) < parseInt(document.getElementById("apWNErange").value) && !spiking) {
+                if (boostAlrPlaced) {
+                    //console.log("already placed");
+                } else {
+                    if (boostPlaced == false) {
+                        for (let i = 0; i < parseInt(document.getElementById("apWNEanzahl").value); i++) {
+                            let angle = myPlayer.dir + toRad(i * 90);
+                            place(boostType, angle);
+                        }
+                        place(boostType);
+                    }
+                    placedBoost();
+                }
+            }
+            if (Math.sqrt(Math.pow(myPlayer.y - nearestEnemy[2], 2) + Math.pow(myPlayer.x - nearestEnemy[1], 2)) < 120) {
+                if (spikeAlrPlaced) {
+                    //console.log("spike alr placed");
+                } else {
+                    if (spikePlaced == false) {
+                        for (let i = 0; i < 3; i++) {
+                            let angle = myPlayer.dir + toRad(i * 120);
+                            place(spikeType, angle);
+                        }
+                    }
+                    placedSpike();
+                }
+            }
+            if (Math.sqrt(Math.pow(myPlayer.y - nearestEnemy[2], 2) + Math.pow(myPlayer.x - nearestEnemy[1], 2)) < 80) {
+                spiking = true;
+            } else {
+                spiking = false;
+            }
+        }
+    }
+    if (isEnemyNear == false && inInsta == false) {
+        normalAcc = 11;
+        if (myPlayer.y < 2400) {
+            normalHat = 15;
+        } else if (myPlayer.y > 6850 && myPlayer.y < 7550) {
+            normalHat = 31;
+        } else {
+            normalHat = 6;
+        }
+    }
+    if (!nearestEnemy) {
+        nearestEnemyAngle = myPlayer.dir;
+    }
+    if (i == "1" && myPlayer.id == null) {
+        myPlayer.id = data[1];
+    }
+    if (i == "12") {
+        if (traped) {
+            if (trapid == data[1]) {
+                s(["5", [primary, true]]);
+                traped = false;
+                s(["c", [0]]);
+                hat(6);
+                acc(21);
+                place(boostType);
+                place(spikeType);
+            }
+        }
+    }
+    if (i == "6") {
+        for (let i = 0; i < data[1].length / 8; i++) {
+            let ObjectData = data[1].slice(8 * i, 8 * i + 8);
+            if (ObjectData[6] == 15 && ObjectData[7] != myPlayer.id && ObjectData[7] != myPlayer.clan) {
+                if (Math.sqrt(Math.pow(myPlayer.y - ObjectData[2], 2) + Math.pow(myPlayer.x - ObjectData[1], 2)) < 90) {
+                    trapCord.x = ObjectData[1];
+                    trapCord.y = ObjectData[2];
+                    trap = Math.atan2(ObjectData[2] - myPlayer.y, ObjectData[1] - myPlayer.x);
+                    traped = true;
+                    trapid = ObjectData[0];
+                    for (let i = 0; i < 10; i++) {
+                        let angle = myPlayer.dir + toRad(i * 16);
+                        place(spikeType, angle);
+                        place(boostType, angle);
+                    }
+                }
+            }
+        }
+    }
+    if(i == "6") {
+        for(let i = 0; i < data[1].length / 8; i++){
+            let ObjectData = data[1].slice(8*i, 8*i+8);
+            if(ObjectData[7] == myPlayer.id) {
+                trapID = ObjectData[0];
+                trapX = ObjectData[1];
+                trapY = ObjectData[2];
+                myTraps.push({
+                    trapID,
+                    trapX,
+                    trapY
+                });
+                console.log(myTraps)
+            }
+        }
+    }
+    if (i == "12" && document.getElementById("ar").checked) {
+        if (nearestEnemy && Math.sqrt(Math.pow(myPlayer.y - nearestEnemy[2], 2) + Math.pow(myPlayer.x - nearestEnemy[1], 2)) < 180) {
+            if (document.getElementById("arWhenEnem").value == "spike") {
+                place(spikeType, nearestEnemyAngle);
+            } else if (document.getElementById("arWhenEnem").value == "boost") {
+                place(boostType, nearestEnemyAngle);
+            } else if (document.getElementById("arWhenEnem").value == "tp") {
+                place(turretType, nearestEnemyAngle);
+            } else {
+                console.log("place nothing");
+            }
+        } else {
+            if (document.getElementById("arWhenNoEnem").value == "spike") {
+                place(spikeType);
+            } else if (document.getElementById("arWhenNoEnem").value == "boost") {
+                place(boostType);
+            } else if (document.getElementById("arWhenNoEnem").value == "tp") {
+                place(turretType);
+            } else {
+                console.log("place nothing");
+            }
+        }
+    }
+    if (i == "h" && data[1] == myPlayer.id) {
+        if (data[2] < 96 && myPlayer.hat == 7) {
+            setTimeout(() => {
+                place(foodType);
+            }, 200);
+        }
+        if (data[2] < 91) {
+            setTimeout(() => {
+                place(foodType);
+            }, 200);
+        }
+        if (data[2] < 61) {
+            s(["13c", [0, 22, 0]]);
+            place(foodType);
+            place(foodType);
+            place(foodType);
+            setTimeout(() => {
+                hat(6);
+                place(foodType);
+            }, 500);
+            setTimeout(() => {
+                bullTick();
+            }, 1000);
+        }
+        /*if(data[2] < 40){
+                place(foodType);
+                place(foodType);
+                place(foodType);
+            }*/
+    }
+    update();
+}
+("use strict");
+let repeater = function mockedDriverFn(element, method, options) {
+    let d = ![];
+    let e = undefined;
+    return {
+        start: function start(child) {
+            if (child == element && document.activeElement.id.toLowerCase() !== "chatbox") {
+                d = !![];
+                if (e === undefined) {
+                    e = setInterval(function() {
+                        method();
+                        if (!d) {
+                            clearInterval(e);
+                            e = undefined;
+                        }
+                    }, options);
+                }
+            }
+        },
+        stop: function Chat(parent) {
+            if (parent == element && document.activeElement.id.toLowerCase() !== "chatbox") {
+                d = ![];
+            }
+        },
+    };
+};
+("use strict");
+let boostPlacer = repeater(70, function() {
+    place(boostType);
+}, 10);
+let spikePlacer = repeater(86, function() {
+    place(spikeType);
+}, 10);
+let turretPlacer = repeater(72, function() {
+    place(turretType);
+}, 10);
+document.addEventListener("keydown", function(e) {
+    boostPlacer.start(e.keyCode);
+    spikePlacer.start(e.keyCode);
+    turretPlacer.start(e.keyCode);
+    if (e.keyCode == 78 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        autoMill = !autoMill;
+        ch("[" + autoMill + "]");
+    }
+    if (e.keyCode == 46 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        s(["6", [7]]);
+        s(["6", [17]]);
+        s(["6", [31]]);
+        s(["6", [23]]);
+        s(["6", [10]]);
+        s(["6", [38]]);
+        s(["6", [4]]);
+        s(["6", [15]]);
+    }
+    if (e.keyCode == 82 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        autoaim = true;
+        inInsta = true;
+        autoprim = true;
+        autosec = false;
+        s(["13c", [0, 0, 1]]);
+        hat(7);
+        s(["5", [primary, true]]);
+        s(["7", [1]]);
+        acc(21);
+        setTimeout(() => {
+            autoprim = false;
+            autosec = true;
+            s(["13c", [0, 0, 0]]);
+            hat(53);
+            s(["5", [secondary, true]]);
+        }, 80);
+        setTimeout(() => {
+            s(["13c", [0, 0, 0]]);
+            s(["13c", [0, 6, 0]]);
+            s(["7", [1]]);
+            s(["5", [primary, true]]);
+            s(["13c", [0, 0, 1]]);
+            s(["13c", [0, 11, 1]]);
+            biomeHat();
+            autoprim = false;
+            autosec = false;
+            autoaim = false;
+            inInsta = false;
+        }, 200);
+    }
+    if (e.keyCode == 89 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        //reverse
+        autoprim = false;
+        autosec = true;
+        autoaim = true;
+        inInsta = true;
+        s(["13c", [0, 0, 1]]);
+        s(["5", [secondary, true]]);
+        s(["7", [1]]);
+        s(["13c", [1, 53, 0]]);
+        s(["13c", [0, 53, 0]]);
+        s(["13c", [1, 21, 1]]);
+        s(["13c", [0, 21, 1]]);
+        setTimeout(() => {
+            autoprim = true;
+            autosec = false;
+            s(["13c", [1, 7, 0]]);
+            s(["13c", [0, 7, 0]]);
+            s(["13c", [0, 21, 1]]);
+            s(["5", [primary, true]]);
+            s(["5", [primary, true]]);
+        }, 100);
+        setTimeout(() => {
+            s(["13c", [0, 0, 0]]);
+            s(["7", [1]]);
+            s(["13c", [0, 11, 1]]);
+            if (myPlayer.y < 2400) {
+                s(["13c", [0, 15, 0]]);
+            } else if (myPlayer.y > 6850 && myPlayer.y < 7550) {
+                s(["13c", [0, 31, 0]]);
+            } else {
+                s(["13c", [0, 6, 0]]);
+            }
+            autoprim = false;
+            autosec = false;
+            autoaim = false;
+            inInsta = false;
+        }, 150);
+    }
+    if (e.keyCode == 16 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        biomeHat();
+    }
+    if (e.keyCode == 66 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        hat(6);
+    }
+    if (e.keyCode == 27 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        hat(0);
+    }
+    if (e.keyCode == 85 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        hat(53);
+    }
+    if (e.keyCode == 188 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        hat(15);
+    }
+    if (e.keyCode == 60 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        hat(31);
+    }
+    if (e.keyCode == 90 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        hat(40);
+    }
+    if (e.keyCode == 74 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        hat(22);
+    }
+    if (e.keyCode == 84 && document.activeElement.id.toLowerCase() !== "chatbox") {
+        hat(7);
+        if (myPlayer.accessory == 11) {
+            acc(0);
+        }
+    }
+});
+document.addEventListener("keyup", function(e) {
+    turretPlacer.stop(e.keyCode);
+    boostPlacer.stop(e.keyCode);
+    spikePlacer.stop(e.keyCode);
+});
+let bullKey = 82;
+let soldierKey = 82;
+let snowCapKey = 82;
+document.getElementById("gameCanvas").addEventListener("mousedown", function(e) {
+    if (document.getElementById("c").checked) {
+        if (e.button == 2) {
+            lhat = myPlayer.hat;
+            lacc = myPlayer.accessory;
+            if (secondary == 10) {
+                s(["5", [secondary, true]]);
+            }
+            hat(document.getElementById("rightclick").value);
+            acc(0);
+            acc(21);
+            s(["7", [1]]);
+        }
+    }
+    if (e.button == 0) {
+        if (document.getElementById("c").checked) {
+            lhat = myPlayer.hat;
+            lacc = myPlayer.accessory;
+            hat(document.getElementById("leftclick").value);
+            acc(0);
+            acc(21);
+            s(["7", [1]]);
+        }
+    }
+});
+document.getElementById("gameCanvas").addEventListener("mouseup", function(e) {
+    if (document.getElementById("c").checked) {
+        if (e.button == 2) {
+            s(["7", [1]]);
+            if (document.getElementById("afterRightClick").value == "hatBefore") {
+                s(["13c", [0, lhat, 0]]);
+            } else {
+                if (myPlayer.y < 2400) {
+                    hat(15);
+                } else {
+                    if (myPlayer.y > 6850 && myPlayer.y < 7550) {
+                        hat(31);
+                    } else {
+                        hat(6);
+                    }
+                }
+            }
+            acc(11);
+            if (secondary == 10) {
+                s(["5", [primary, true]]);
+            }
+        }
+    }
+    if (document.getElementById("c").checked) {
+        if (e.button == 0) {
+            s(["7", [1]]);
+            if (document.getElementById("afterLeftClick").value == "hatBefore") {
+                s(["13c", [0, lhat, 0]]);
+            } else {
+                if (myPlayer.y < 2400) {
+                    hat(15);
+                } else {
+                    if (myPlayer.y > 6850 && myPlayer.y < 7550) {
+                        hat(31);
+                    } else {
+                        hat(6);
+                    }
+                }
+            }
+            acc(11);
+        }
+    }
+});
+
+function isElementVisible(options) {
+    return options.offsetParent !== null;
+}
+
+function toRad(angle) {
+    return angle * 0.01745329251;
+}
+
+function dist(p1, p) {
+    return Math.sqrt(Math.pow(p.y - p1[2], 2) + Math.pow(p.x - p1[1], 2));
+}
+("use strict");
+
+function update() {
+    let event = 0;
+    for (; event < 9; event++) {
+        if (isElementVisible(document.getElementById("actionBarItem" + event.toString()))) {
+            primary = event;
+        }
+    }
+    let div = 9;
+    for (; div < 16; div++) {
+        if (isElementVisible(document.getElementById("actionBarItem" + div.toString()))) {
+            secondary = div;
+        }
+    }
+    let tobj = 16;
+    for (; tobj < 19; tobj++) {
+        if (isElementVisible(document.getElementById("actionBarItem" + tobj.toString()))) {
+            foodType = tobj - 16;
+        }
+    }
+    let e = 22;
+    for (; e < 26; e++) {
+        if (isElementVisible(document.getElementById("actionBarItem" + e.toString()))) {
+            spikeType = e - 16;
+        }
+    }
+    let f = 26;
+    for (; f < 29; f++) {
+        if (isElementVisible(document.getElementById("actionBarItem" + f.toString()))) {
+            millType = f - 16;
+        }
+    }
+    let h = 31;
+    for (; h < 33; h++) {
+        if (isElementVisible(document.getElementById("actionBarItem" + h.toString()))) {
+            boostType = h - 16;
+        }
+    }
+    let intval = 33;
+    for (; intval < 39; intval++) {
+        if (isElementVisible(document.getElementById("actionBarItem" + intval.toString())) && intval != 36) {
+            turretType = intval - 16;
+        }
+    }
+    spawnType = 36;
+}
+let clownTime = document.createElement("div");
+clownTime.innerHTML = `<div id="infos">
+  <p class="cTp cT1">Clown ends in: </p><p class="cTp" id="sec">0</p><p class="cTp">s</p>
+</div>`;
+clownTime.id = "clownTime";
+let menuChange = document.createElement("div");
+menuChange.className = "menuCard";
+menuChange.id = "mainSettings";
+menuChange.innerHTML = `
+       <div class="menu" id="wholeMenu">
+  <div id="buttonHolder"> <button id="menu" class="menuChangeThings">Settings</button>
+    <button id="keys" class="menuChangeThings">KeyStrokes</button>
+  </div>
+  <button id="closeBtn" title="Close">X</button>
+  <div id="settings">
+    <p class="heading">Auto-Things</p>
+    <input type="checkbox" class="checkbox" id="ap">AutoPlace</input>
+    <button class="OptBtn" id="apOptBtn">Show more Options</button>
+    <div id="apOpt">
+      <p>Place
+        <select id="apWNEanzahl">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+        </select>
+        of <select id="apWhenNearEnem">
+          <option value="boost">Trap/Boost Pad</option>
+          <option value="spike">Spike</option>
+          <option value="nothing">nothing</option>
+        </select> when enemy is less than <select id="apWNErange">
+          <option value="100">100</option>
+          <option value="120">120</option>
+          <option value="140">140</option>
+          <option value="160">160</option>
+          <option value="180">180</option>
+          <option value="200">200</option>
+          <option value="220">220</option>
+          <option value="240">240</option>
+          <option value="260">260</option>
+          <option value="280">280</option>
+          <option value="300" selected>300</option>
+          <option value="320">320</option>
+          <option value="340">340</option>
+          <option value="360">360</option>
+          <option value="380">380</option>
+          <option value="400">400</option>
+          <option value="420">420</option>
+          <option value="440">440</option>
+          <option value="460">460</option>
+          <option value="480">480</option>
+          <option value="500">500</option>
+          <option value="520">520</option>
+          <option value="540">540</option>
+          <option value="560">560</option>
+          <option value="580">580</option>
+          <option value="600">600</option>
+          <option value="620">620</option>
+          <option value="640">640</option>
+          <option value="660">660</option>
+          <option value="680">680</option>
+          <option value="700">700</option>
+          <option value="720">720</option>
+          <option value="740">740</option>
+          <option value="760">760</option>
+          <option value="780">780</option>
+          <option value="800">800</option>
+          <option value="820">820</option>
+          <option value="840">840</option>
+          <option value="860">860</option>
+          <option value="880">880</option>
+          <option value="900">900</option>
+          <option value="1000">1000</option>
+        </select> away.
+      </p>
+
+      <p class="higherPlz">Place...when enemy is less than 120 away:</p>
+      <select class="arSlct" id="apWhenVeryNearEnem">
+        <option value="spike">Spike</option>
+        <option value="boost">Trap/Boost Pad</option>
+        <option value="nothing">nothing</option>
+      </select>
+    </div>
+    <br>
+    <input type="checkbox" class="checkbox" id="ar">Auto-Replace</input>
+    <button class="OptBtn" id="arOptBtn">Show more Options</button>
+    <div id="arOpt">
+      <p>Replace...when enemy isnt near:</p>
+      <select class="arSlct" id="arWhenNoEnem">
+        <option value="boost">Trap/Boost Pad</option>
+        <option value="spike">Spike</option>
+        <option value="tp">Turret/Teleporter/etc..</option>
+        <option value="nothing">nothing</option>
+      </select>
+      <p class="higherPlz">Replace...when enemy is near:</p>
+      <select class="arSlct" id="arWhenEnem">
+        <option value="spike">Spike</option>
+        <option value="boost">Trap/Boost Pad</option>
+        <option value="tp">Turret/Teleporter/etc..</option>
+        <option value="nothing">nothing</option>
+      </select>
+    </div>
+    <br>
+    <input type="checkbox" class="checkbox" id="ae">Auto-Emp (if turret get placed)</input>
+    <br>
+    <input type="checkbox" class="checkbox" id="aBuy">Auto-Buy</input>
+    <br>
+    <br>
+    <p class="heading">Click-Settings</p>
+    <input type="checkbox" class="checkbox" id="c" title="Click Bull/Tank or other things">Use Mouse Buttons for more actions</input>
+    <br>
+    <button class="OptBtn" id="cOptBtn">Show more Options</button>
+    <div id="cOpt">
+      <p>On left Click:</p>
+      <select name="hat" id="leftclick" class="arSlct">
+        <option value="7">Bull Helmet</option>
+        <option value="40">Tank Gear</option>
+      </select>
+      <p class="higherPlz">Hat after left Click:</p>
+      <select class="arSlct" id="afterLeftClick">
+        <option value="boost">Biome Hat</option>
+        <option value="hatBefore">The hat that you had euiped</option>
+      </select>
+      <p class="higherPlz1">On Middle Click:</p>
+      <select class="arSlct" id="middleclick">
+        <option value="40">Tank Gear</option>
+        <option value="7">Bull Helmet</option>
+      </select>
+      <p class="higherPlz1">After middle Click:</p>
+      <select class="arSlct" id="afterMiddleClick">
+        <option value="boost">Biome Hat</option>
+        <option value="hatBefore">The hat that you had euiped</option>
+      </select>
+      <p class="higherPlz1">on right Click:</p>
+      <select class="arSlct" id="rightclick">
+        <option value="40">Tank Gear</option>
+        <option value="7">Bull Helmet</option>
+      </select>
+      <p class="higherPlz" 1>after right Click:</p>
+      <select class="arSlct" id="afterRightClick">
+        <option value="boost">Biome Hat</option>
+        <option value="hatBefore">The hat that you had euiped</option>
+      </select>
+    </div>
+    <br>
+  </div>
+  <div class="keysSetting" id="keysSettings">
+
+    <p class="heading">Hat Macro</p>
+    <div id="hatMacro">
+      <div class="keystrokesainput">
+        <p class="keystrokes">Bull Hat:</p><input id="bullHat" class="keystrokesInput" type="text" value="T" maxlength="1">
+      </div>
+      <div class="keystrokesainput">
+        <p class="keystrokes">Solider:</p><input id="solider" class="keystrokesInput" type="text" value="T" maxlength="1">
+      </div>
+      <div class="keystrokesainput">
+        <p class="keystrokes">Turret Gear:</p><input id="turretGear" class="keystrokesInput" type="text" value="T" maxlength="1">
+      </div>
+      <div class="keystrokesainput">
+        <p class="keystrokes">Emp Gear:</p><input id="empGear" class="keystrokesInput" type="text" value="T" maxlength="1">
+      </div>
+      <div class="keystrokesainput">
+        <p class="keystrokes">Tank Gear:</p><input id="tankGear" class="keystrokesInput" type="text" value="T" maxlength="1">
+      </div>
+      <div class="keystrokesainput">
+        <p class="keystrokes">Unequip hat:</p><input id="unequip" class="keystrokesInput" type="text" value="T" maxlength="1">
+      </div>
+      <div class="keystrokesainput">
+        <p class="keystrokes">Fish Gear:</p><input id="fishGear" class="keystrokesInput" type="text" value="T" maxlength="1">
+      </div>
+      <div class="keystrokesainput">
+        <p class="keystrokes">Snow Cap:</p><input id="snowCap" class="keystrokesInput" type="text" value=${String.fromCharCode(
+    snowCapKey
+)} maxlength="1" onkeyup="this.value = this.value.toUpperCase();">
+      </div>
+    </div>
+  </div>
+</div>
+        `;
+document.body.appendChild(menuChange);
+document.body.appendChild(clownTime);
+let styleItem1 = document.createElement("style");
+styleItem1.type = "text/css";
+styleItem1.appendChild(document.createTextNode(`
+u {
+  font-size: 20px;
+}
+
+.menu {
+  height: 35%;
+  width: 27%;
+  min-height: 180px;
+  min-width: 285px;
+  border-style: solid;
+  border-width: 2px;
+  background-color: rgba(6, 6, 6, 0.24);
+  overflow-y: auto;
+  position: fixed;
+  top: 5px;
+  resize: both;
+  left: 5px;
+  z-index: 99;
+  font-size: 14px;
+}
+
+.keysSetting {
+  display: none;
+}
+
+h3 {
+  text-align: center;
+}
+
+.heading {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 0px;
+  margin-left: 10px;
+}
+
+.checkbox {
+  margin-left: 10px;
+}
+
+.OptBtn {
+  height: 20px;
+  width: 130px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#arOpt {
+  display: none;
+  font-size: 13px;
+  margin-left: 30px;
+  margin-top: -12px;
+  height: 70px;
+}
+
+.arSlct {
+  height: 20px;
+  position: relative;
+  top: -12px;
+}
+
+.higherPlz {
+  margin-top: -8px;
+}
+.higherPlz1 {
+  margin-top: 1px;
+}
+
+#closeBtn {
+  cursor: pointer;
+  position: sticky;
+  float: right;
+  top: 7px;
+  right: 7px;
+  margin-top: -52px;
+  height: 23px;
+  width: 23px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#cOptBtn {
+  margin-left: 26px;
+}
+
+#cOpt {
+  display: none;
+  font-size: 13px;
+  margin-left: 30px;
+  margin-top: -12px;
+}
+
+.anchor {
+  font-size: 19px;
+}
+
+#details {
+  font-size: 13px;
+  position: absolute;
+  width: auto;
+  height: auto;
+  top: 2px;
+  left: 2px;
+  display: block;
+  color: #fff;
+  background-color: rgb(21, 21, 21);
+  z-index: 100;
+}
+
+#apOpt {
+  margin-top: -12px;
+  margin-bottom: 0px;
+  margin-left: 30px;
+  display: none;
+}
+p {
+  font-size: 13.5px;
+}
+#infos {
+  display: none;
+  background-color: rgb(250, 0, 0);
+  border: 4px solid orangered;
+  padding: 3px;
+  width: 130px;
+  font-family: Arial;
+  font-size: 16px;
+  position: fixed;
+  top: 40px;
+  left: 45%;
+}
+
+p.cTp {
+  display: inline;
+}
+
+.cT1 {
+  margin-left: 5px;
+}
+#buttonHolder {
+  height: 40px;
+  width: 200px;
+}
+.menuChangeThings {
+  margin: 4px 2px 15px 7px;
+  border: solid 2px;
+  border-radius: 1px;
+  background-color: rgb(140, 140, 140);
+  height: 28px;
+  width: 80px;
+  position: fixed;
+}
+#menu {
+  width: 60px;
+}
+#keys {
+  left: 80px;
+  margin-left: 0px;
+}
+
+.menuChangeThings:hover {
+  background-color: rgb(200, 200, 200);
+  cursor: pointer;
+}
+#apWhenNearEnem {
+  top: -1px;
+  margin: 0px 4px 0px 4px;
+}
+
+#hatMacro {
+  margin-left: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 120px));
+
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.keystrokesInput {
+  height: 16px;
+  width: 16px;
+  text-align: center;
+  font-size: 16px;
+  margin: 5px;
+}
+
+.keystrokesainput {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  background-color: rgba(6, 6, 6, 0.17);
+  border: inset 1px black;
+  height: auto;
+  width: auto;
+  max-height: 40px;
+}
+
+
+`));
+document.head.appendChild(styleItem1);
+let shows = {
+    arC: false,
+    apC: false,
+    cC: false,
+};
+document.getElementById("arOptBtn").addEventListener("click", function() {
+    shows.arC = !shows.arC;
+    if (shows.arC) {
+        document.getElementById("arOpt").style.display = "block";
+        document.getElementById("arOptBtn").innerHTML = "Show less Options";
+    } else {
+        document.getElementById("arOpt").style.display = "none";
+        document.getElementById("arOptBtn").innerHTML = "Show more Options";
+    }
+});
+document.getElementById("apOptBtn").addEventListener("click", function() {
+    shows.apC = !shows.apC;
+    if (shows.apC) {
+        document.getElementById("apOpt").style.display = "block";
+        document.getElementById("apOptBtn").innerHTML = "Show less Options";
+    } else {
+        document.getElementById("apOpt").style.display = "none";
+        document.getElementById("apOptBtn").innerHTML = "Show more Options";
+    }
+});
+document.getElementById("cOptBtn").addEventListener("click", function() {
+    shows.cC = !shows.cC;
+    if (shows.cC) {
+        document.getElementById("cOpt").style.display = "block";
+        document.getElementById("cOptBtn").innerHTML = "Show less Options";
+    } else {
+        document.getElementById("cOpt").style.display = "none";
+        document.getElementById("cOptBtn").innerHTML = "Show more Options";
+    }
+});
+document.getElementById("closeBtn").addEventListener("click", () => {
+    document.getElementById("wholeMenu").style.display = "none";
+});
+document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 27) {
+        if ((document.getElementById("wholeMenu").style.display = "none")) {
+            document.getElementById("wholeMenu").style.display = "block";
+        }
+    }
+});
+document.getElementById("menu").addEventListener("click", function() {
+    document.getElementById("keysSettings").style.display = "none";
+    document.getElementById("settings").style.display = "block";
+});
+document.getElementById("keys").addEventListener("click", function() {
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("keysSettings").style.display = "block";
+});
+document.addEventListener("keydown", function(e) {
+    if (e.keyCode == snowCapKey) {
+        console.log("snowCap");
+    }
+});
+document.querySelector("#snowCap").addEventListener("input", () => {
+    var cval = document.querySelector("#snowCap").value;
+    if (cval) {
+        snowCapKey = cval.toUpperCase();
+        snowCapKey = snowCapKey.charCodeAt(0);
+        console.log(snowCapKey);
+    }
+});
+document.getElementById("details").addEventListener("click", function() {
+    traped = false;
+});
+setInterval(() => {
+    details.innerHTML = `
+    Traped: ${traped}
+    `;
+}, 50);
+var timeLeft = 30;
+setInterval(() => {
+    if (myPlayer.hat == 45) {
+        clownTime.style.display = "block";
+        if (timeLeft != 0) {
+            document.getElementById("sec").innerHTML = `${timeLeft}`;
+            timeLeft--;
+        }
+        if (timeLeft == 0) {
+            timeLeft = 30;
+        }
+    }
+    if (myPlayer.hat != 45) {
+        clownTime.style.display = "none";
+        timeLeft = 30;
+    }
+}, 1000);
+/*
+so, we want to make autoplace
+:D
+no or gay
+so my idea is
+autoplace:
+if enemy is 300 near thann place traps except your in trap
+if enemy is 120 near than place spike
+if enemy is 80 near than only spike
+but thats bad cuz ye so i want to check if the enemy is in your trap where youre near and than place
+spike next to him so he got trap spiked iziziz
+
+lol so
+
+let myTraps = [
+
+];
+let buildings = [
+
+];
+if(i == "6") {
+   for(let i = 0; i < data[1].length / 8; i++){
+            let ObjectData = data[1].slice(8*i, 8*i+8);
+            if(ObjectData[7] == myPlayer.id) {
+            buildOwner = true;
+            myTraps.push();
+            } else {
+            buildOwner = false;
+            buildID = ObjectData[0];
+            buildings.push();
+            }
+        }
+    }
+if(i = "12"){
+  if(buildOwner) {
+  myTraps.slice();//
+  } else {
+  buildings.slice()
+  }
+}
+
+*/
