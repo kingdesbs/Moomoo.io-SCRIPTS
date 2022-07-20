@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name          🔷ᗷᒪᑌE🔷ᗪᖇᗩGOᑎ🔷
+// @name          🔷ᗷᒪᑌE🔷Dragon🔷
 // @namespace     Best Hack 2021/2022!
-// @version       8.4.0
+// @version       8.7.0
 // @description   🔷PRIVATE🔷
 // @author        🔷MOJASTER-X, Lost DuckZ🔷
 // @match         *://moomoo.io/*
@@ -17,12 +17,12 @@
 //          Share scripts server:  https://discord.gg/HabBEraybj
 //          Share scripts server:  https://discord.gg/HabBEraybj
 //          Share scripts server:  https://discord.gg/HabBEraybj
-var YouName = window.prompt("Fuck Write U Fucking Name (Mojaster-X, Lost DuckZ)","");
+var YouName = window.prompt("(Mojaster-X, Lost DuckZ)","");
 
 $("#leaderboard").css({
     'background-color': 'rgba(number, number, number, .5)',
      'background': 'url(https://i.pinimg.com/originals/12/4a/99/124a99f1623164e1ed6537c020449ed9.jpg)',
-  'border':'1000px solid #000000',
+  'border':'25px solid #000000',
 'border-radius': '43px'
  });
 
@@ -4239,6 +4239,7 @@ $("#leaderboard").css({
                            1 == _.iconIndex && Rn.skull.isLoaded && (b = o.crownIconScale,
                                                                      k = _.x - f - b / 2 + be.measureText(w).width / 2 + o.crownPad,
                                                                      be.drawImage(Rn.skull, k, _.y - d - _.scale - o.nameY - b / 2 - 5, b, b))
+
                        }
                        window.items = R.items;
                        window.w = R.weapons;
@@ -9675,7 +9676,7 @@ document.getElementById('errorNotification').remove();
 document.getElementById("leaderboard").style.color = "#00FFFF";
 document.getElementById("gameName").style.color = "#0404B4";
 document.getElementById("setupCard").style.color = "#0404B4";
-document.getElementById("mainMenu").style.backgroundImage = "url('https://www.pxwall.com/wp-content/uploads/2018/06/Wallpaper%20Horsehead%20Nebula,%208k,%20Space%201891614244.jpg')";
+document.getElementById("mainMenu").style.backgroundImage = "url('https://images.alphacoders.com/259/thumb-1920-259883.jpg')";
 document.getElementById("killCounter").style.color = "#000000";
 document.getElementById("ageText").style.color = "#0404B4";
 document.getElementById("allianceButton").style.color = "#0404B4";
@@ -9995,7 +9996,7 @@ $('#chatBox').css({'-webkit-border-radius': '0px',
                    'background-color': 'rgba(0, 0, 255, 0.5)',
                    'text-align': 'center'});
 
-$('#mainMenu').css({'-webkit-border-radius': '0px',
+$('#mainMenu').css({'-webkit-border-radius': '25px',
                    'text-align': 'center'});
 
 $('#ageBar').css({'-webkit-border-radius': '0px',
@@ -13184,7 +13185,7 @@ document.addEventListener('keydown', (e)=>{
             doNewSend(["13c", [0, 0, 1]]);
             doNewSend(["13c", [0, 19, 1]]);
             doNewSend(["5", [secondary, true]]);
-        }, instaspeed - 130);
+        }, instaspeed - 137);
 
         setTimeout( () => {
             doNewSend(["5", [primary, true]]);
@@ -13249,7 +13250,7 @@ document.addEventListener('keydown', (e)=>{
             doNewSend(["13c", [0, 0, 1]]);
             doNewSend(["13c", [0, 19, 1]]);
             doNewSend(["5", [secondary, true]]);
-        }, instaspeed - 130);
+        }, instaspeed - 137);
 
         setTimeout( () => {
             doNewSend(["5", [primary, true]]);
@@ -13370,7 +13371,7 @@ document.addEventListener('keydown', (e)=>{
             doNewSend(["13c", [0, 53, 0]]);
             doNewSend(["13c", [0, 0, 1]]);
             doNewSend(["13c", [0, 19, 1]]);
-        }, instaspeed - 130);
+        }, instaspeed - 137);
 
         setTimeout( () => {
             doNewSend(["5", [primary, true]]);
@@ -13434,7 +13435,7 @@ document.addEventListener('keydown', (e)=>{
         }, 200);
     }
     if(e.keyCode == 76 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-        doNewSend(["ch", ["Meow eZ Meow"]]);
+        doNewSend(["ch", ["hope u ded"]]);
         autoaim=true
         doNewSend(["5", [secondary, true]]);
         doNewSend(["c", [1]]);
@@ -13660,7 +13661,7 @@ function animate(space, chance) {
     let result = '';
     let characters;
     if(space) {
-        characters = 'Blue|DraGon By Mojaster-X';
+        characters = 'Blue|DraGon';
     } else {
         characters = 'Blue';
     }
@@ -13683,7 +13684,7 @@ function animate1(space, chance) {
     let result = '';
     let characters;
     if(space) {
-        characters = 'Blue|DraGon By ImTheDuck';
+        characters = 'Blue|DraGon By German';
     } else {
         characters = 'Blue';
     }
@@ -17039,18 +17040,223 @@ $("#enterGame").click( () => {
         },1200);
     },1400);
 });
+
+(be.textAlign = "center",
+be.fillStyle = "#ff0000",
+be.lineJoin = "round",
+be.font = "20px Hammersmith One",
+be.lineWidth = 6,
+be.strokeText(`MooMod`,_.x - f,_.y - d + _.scale + o.nameY+(80)),
+be.fillText(`MooMod`,_.x - f,_.y - d + _.scale + o.nameY+(80))
+)
+
 // ==UserScript==
-// @name         New Userscript
+// @name         Clock + Ping
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  try to take over the world!
-// @author       You
-// @match        https://www.crazygames.com/game/moomoo-io-sandbox
+// @description  Why i wreat here?
+// @author       Noyan
+// @match        *://moomoo.io/*
+// @match        *://sandbox.moomoo.io/*
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
+var autoreloadloop;
+var autoreloadenough = 0;
 
-    // Your code here...
-})();
+autoreloadloop = setInterval(function() {
+    if (autoreloadenough < 200) {
+        if (document.getElementById("loadingText").innerHTML == `disconnected<a href="javascript:window.location.href=window.location.href" class="ytLink">reload</a>`) {
+            document.title = "Moo Moo";
+            clearInterval(autoreloadloop);
+            setTimeout(function() {}, 1000)
+            location.reload();
+        }
+        autoreloadenough++;
+    } else if (autoreloadenough >= 300) {
+        clearInterval(autoreloadloop);
+        setTimeout(function() {}, 1000)
+    }
+}, 50);
+
+var sec = 0;
+var Menit = 0;
+var Houre = 0;
+setInterval(() => {
+setTimeout( () => {
+    sec = (sec + 1)
+        function getRandom(min,max){
+    return Math.floor(Math.random()*max)+min;
+};
+let RandomMsg=(getRandom(1,4)).toString();
+    switch(RandomMsg){
+         case '1':
+       document.getElementById('ClockDiv').style.color = "#ff0000";
+            break;
+         case '2':
+       document.getElementById('ClockDiv').style.color = "#00f2de";
+            break;
+
+        case '3':
+       document.getElementById('ClockDiv').style.color = "#1e00ff";
+            break;
+       case '4':
+        document.getElementById('ClockDiv').style.color = "#ff00ee";
+            break;
+    }
+}, 0);
+}, 1000);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('SDiv').style.color = "#ff0000";
+            setTimeout(() => {
+                document.getElementById('SDiv').style.color = "#00f2de";
+                setTimeout(() => {
+                    document.getElementById('SDiv').style.color = "#1e00ff";
+                    setTimeout(() => {
+                        document.getElementById('SDiv').style.color = "#ff00ee";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('wDiv').style.color = "#ff0000";
+            setTimeout(() => {
+                document.getElementById('wDiv').style.color = "#00f2de";
+                setTimeout(() => {
+                    document.getElementById('wDiv').style.color = "#1e00ff";
+                    setTimeout(() => {
+                        document.getElementById('wDiv').style.color = "#ff00ee";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('dDiv').style.color = "#ff0000";
+            setTimeout(() => {
+                document.getElementById('dDiv').style.color = "#00f2de";
+                setTimeout(() => {
+                    document.getElementById('dDiv').style.color = "#1e00ff";
+                    setTimeout(() => {
+                        document.getElementById('dDiv').style.color = "#ff00ee";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('aDiv').style.color = "#ff0000";
+            setTimeout(() => {
+                document.getElementById('aDiv').style.color = "#00f2de";
+                setTimeout(() => {
+                    document.getElementById('aDiv').style.color = "#1e00ff";
+                    setTimeout(() => {
+                        document.getElementById('aDiv').style.color = "#ff00ee";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('x011Div').style.color = "#000000";
+            setTimeout(() => {
+                document.getElementById('x011Div').style.color = "#000000";
+                setTimeout(() => {
+                    document.getElementById('x011Div').style.color = "#000000";
+                    setTimeout(() => {
+                        document.getElementById('x011Div').style.color = "#000000";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('x013Div').style.color = "#000000";
+            setTimeout(() => {
+                document.getElementById('x013Div').style.color = "#000000";
+                setTimeout(() => {
+                    document.getElementById('x013Div').style.color = "#000000";
+                    setTimeout(() => {
+                        document.getElementById('x013Div').style.color = "#000000";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('QDiv').style.color = "#000000";
+            setTimeout(() => {
+                document.getElementById('QDiv').style.color = "#000000";
+                setTimeout(() => {
+                    document.getElementById('QDiv').style.color = "#000000";
+                    setTimeout(() => {
+                        document.getElementById('QDiv').style.color = "#000000";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('x012Div').style.color = "#000000";
+            setTimeout(() => {
+                document.getElementById('x012Div').style.color = "#000000";
+                setTimeout(() => {
+                    document.getElementById('x012Div').style.color = "#000000";
+                    setTimeout(() => {
+                        document.getElementById('x012Div').style.color = "#000000";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+    setInterval(() => {
+        setTimeout(() => {
+            document.getElementById('SLOLDiv').style.color = "#000000";
+            setTimeout(() => {
+                document.getElementById('SLOLDiv').style.color = "#000000";
+                setTimeout(() => {
+                    document.getElementById('SLOLDiv').style.color = "#000000";
+                    setTimeout(() => {
+                        document.getElementById('SLOLDiv').style.color = "#000000";
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 500);
+
+
+setInterval(() => {
+    if(sec == 60){
+        sec = 0;
+        Menit = (Menit + 1)
+    }
+        }, 0);
+setInterval(() => {
+if(Menit == 60){
+   Menit = 0;
+    Houre = (Houre + 1)
+}
+    }, 0);
+  var Clock = document.createElement("div");
+  Clock.style.padding = "5px";
+Clock.id = "ClockDiv";
+  Clock.style.font = "30px Arial";
+  Clock.style.display = "block";
+  Clock.style.position = "fixed";
+  Clock.style.top = "0%";
+  Clock.style.left = "0%";
+Clock.textContent = "Loading";
+  document.body.appendChild(Clock);
+setInterval(()=>{
+Clock.textContent = "DraGonic Clock ==> "+Houre+":"+Menit+":"+sec+' <==';
+}, 0);
+
