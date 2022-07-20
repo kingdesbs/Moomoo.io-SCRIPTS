@@ -10,6 +10,9 @@
 // @require      https://ksw2-center.glitch.me/users/fzb/msgpack.js
 // @grant        none
 // ==/UserScript==
+//          Share scripts server:  https://discord.gg/HabBEraybj
+//          Share scripts server:  https://discord.gg/HabBEraybj
+//          Share scripts server:  https://discord.gg/HabBEraybj
 
 //document.body.append(`<div style="background-color: rgba(200,236,243,0.5); height: 100%; width: 100%;"></div>`);
 
