@@ -11,6 +11,7 @@
 //          Share scripts server:  https://discord.gg/HabBEraybj
 //          Share scripts server:  https://discord.gg/HabBEraybj
 //          Share scripts server:  https://discord.gg/HabBEraybj
+
 const pee = $("#pingDisplay");pee.css("top", "20px"), pee.css("font-size", "15px"), pee.css("display", "block"), $("body").append(pee);
 document.getElementById("gameName").innerHTML = "Cow Game .io", $("#consentBlock").css({display: "none"}), $("#youtuberOf").css({display: "none"}), document.getElementById("linksContainer2").style.display = "none", $("#mapDisplay").css({background: "url('https://i.imgur.com/fgFsQJp.png')"}), document.getElementById("adCard").remove(), document.getElementById("promoImgHolder").style.display = "none", document.getElementById("moomooio_728x90_home").style.display = "none", $("#moomooio_728x90_home").parent().css({display: "none"}), window.onbeforeunload = null;
 let modMenu = document.createElement("div");
