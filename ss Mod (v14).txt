@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        ss mod v14
+// @name        ss mod v14 ( not real )
 // @namespace   -
 // @version     v14
 // @description gg
