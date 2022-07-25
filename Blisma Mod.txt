@@ -5,7 +5,6 @@
 // @match        *://moomoo.io/*
 // @match        *://dev.moomoo.io/*
 // @match        *://sandbox.moomoo.io/*
-// @include      *
 // @description  Blisma mod best mod
 // @grant        none
 // @icon    https://media.discordapp.net/attachments/932404966809821188/935924708661162044/Blisma.png
