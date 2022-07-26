@@ -5,7 +5,6 @@
 // @author       nobody important
 // @match        *://moomoo.io/*
 // @match        *://sandbox.moomoo.io/*
-// @match       *://discord.com/*
 // @match        sandbox.moomoo.io/?server=9:2:0
 // @require      https://rawgit.com/kawanet/msgpack-lite/master/dist/msgpack.min.js
 // @grant        none
