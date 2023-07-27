@@ -1,15 +1,15 @@
 // ==UserScript==
-// @name         x-ware
-// @version      3.1
+// @name         xv3.1
 // @description  evee's x-ware :)
 // @author       x-z3r0
+// @grant        none
 // @run-at       document-start
+// @noframes
 // @match        *://moomoo.io/*
 // @match        *://sandbox.moomoo.io/*
+// @grant  *
 // ==/UserScript==
-//          Share scripts server:  https://discord.gg/HabBEraybj
-//          Share scripts server:  https://discord.gg/HabBEraybj
-//          Share scripts server:  https://discord.gg/HabBEraybj
+
 
 //anti invis
 let R = CanvasRenderingContext2D.prototype.rotate;
