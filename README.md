@@ -1,1 +1,1 @@
-# Moomoo.io userscripts
+# Moomoo.io userscripts archive
