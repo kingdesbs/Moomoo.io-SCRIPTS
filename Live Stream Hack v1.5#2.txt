@@ -1,0 +1,190 @@
+// ==UserScript==
+// @name         Live Stream Hack #2 (MooMoo.io) (Official Name: Cosis)
+// @namespace    http://tampermonkey.net/
+// @version      1.5
+// @description  Coding on stream "ONLY"
+// @author       RaZoshi, helping from AxxyTheCat
+// @match        *://*.moomoo.io/*
+// @match        *://*moomoo.io/*
+// @icon         https://moomoo.io/img/favicon.png?v=1
+// @require      https://greasyfork.org/scripts/467584-moomoo/code/MooMoo.js?version=1198636
+// @grant        none
+// ==/UserScript==
+
+//OMG im proe coder (blacky suck, zyenith too, feature too);
+var AutoReload = setInterval(() => {
+    if(document.getElementById("loadingText").textContent=="disconnectedreload"){
+        window.onbeforeunload = null;
+        clearInterval(AutoReload);
+        window.location.reload();
+    }
+});
+const pee = $("#pingDisplay");pee.css("top", "20px"), pee.css("font-size", "9px"), pee.css("display", "block"), $("body").append(pee);
+const boughtHats = [];
+function checkwaing(p) {
+    return Number(document.getElementById("scoreDisplay").textContent) > p;
+}
+const interval = setInterval(() => {
+    if (!window?.storeBuy) return;
+     if (checkwaing(6000)) window.storeBuy(7), boughtHats.push(7); //bull hat
+     if (checkwaing(6000)) window.storeBuy(12), boughtHats.push(12); //boost hat
+     if (checkwaing(6000)) window.storeBuy(22), boughtHats.push(22); //emp hat
+     if (checkwaing(4000)) window.storeBuy(6), boughtHats.push(6); //soldier hat
+     if (checkwaing(10000)) window.storeBuy(53), boughtHats.push(53); //turret hat
+    if (checkwaing(15000)) window.storeBuy(40), boughtHats.push(40); //tank hat
+    //accesoriess
+    if (checkwaing(2000)) window.storeBuy(11, 1); //monkey tail
+    if (checkwaing(20000)) window.storeBuy(21, 1); //CX wings
+    if (checkwaing(20000)) window.storeBuy(18, 1); //Blood Wings
+}, 2000); //interval for buying hats / accesoriess
+document.getElementById("gameName").innerHTML = "Cosis"
+document.getElementById("loadingText").innerHTML = "" // <= remove loading text
+
+
+
+
+const hatMacro = [
+    {
+        id: 6,
+        name: "Soldier Helmet",
+        price: 4000,
+        code: "KeyB"
+    },
+    {
+        id: 40,
+        name: "Tank Gear",
+        price: 15000,
+        code: "KeyZ"
+    },
+    {
+        if: 26,
+        name: "Barbarian Armor",
+        price: 8000,
+        code: "keyP"
+    },
+    {
+        if: 20,
+        name: "Samurai Armor",
+        price: 12000,
+        code: "keyU"
+    },
+    {
+        id: 12,
+        name: "Booster Hat",
+        price: 6000,
+        code: "KeyM"
+    },
+    {
+        id: 22,
+        name: "Emp Helmet",
+        price: 6000,
+        code: "KeyJ"
+    },
+    {
+        id: 53,
+        name: "Turret Gear",
+        price: 10000,
+        code: "KeyG"
+    },
+    {
+        id: 7,
+        name: "Bull Helmet",
+        price: 6000,
+        code: "KeyT"
+    }
+]
+
+
+document.addEventListener("keydown", ({code}) => {
+    for (let i = 0; i < hatMacro.length; i++) {
+        hatMacro[i].code == code && window.storeEquip(hatMacro[i].id, 0)
+    }
+});
+
+var e = function () {}[69],
+  t = {},
+  n = 100; // don't edit if you don't want to be kicked from the server
+document.addEventListener("keydown", function (e) {
+  70 == e.keyCode &&
+    "chatbox" !== document.activeElement.id.toLowerCase() &&
+    (t.placeTrap = !0);
+}),
+  document.addEventListener("keyup", function (e) {
+    70 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeTrap = !1);
+  }),
+  document.addEventListener("keydown", function (e) {
+    86 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeSpike = !0);
+  }),
+  document.addEventListener("keyup", function (e) {
+    86 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeSpike = !1);
+  }),
+  document.addEventListener("keydown", function (e) {
+    72 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeTeleport = !0);
+  }),
+  document.addEventListener("keyup", function (e) {
+    72 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeTeleport = !1);
+  }),
+  document.addEventListener("keydown", function (e) {
+    81 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeFood = !0);
+  }),
+  document.addEventListener("keyup", function (e) {
+    81 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeFood = !1);
+  }),
+  document.addEventListener("keydown", function (e) {
+    78 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeMill = !0);
+  }),
+  document.addEventListener("keyup", function (e) {
+    78 == e.keyCode &&
+      "chatbox" !== document.activeElement.id.toLowerCase() &&
+      (t.placeMill = !1);
+  });
+var o = e.ActivePlayerManager,
+  a = o.players,
+  c = 0;
+function d() {
+  e.myPlayer, (0, e.myPlayer.place)(e.myPlayer.inventory.spike);
+}
+function i() {
+  e.myPlayer, (0, e.myPlayer.place)(e.myPlayer.inventory.turret);
+}
+function r() {
+  e.myPlayer, (0, e.myPlayer.place)(e.myPlayer.inventory.trap);
+}
+function l() {
+  e.myPlayer, (0, e.myPlayer.place)(e.myPlayer.inventory.food);
+}
+function y() {
+  e.myPlayer, (0, e.myPlayer.place)(e.myPlayer.inventory.mill);
+}
+function m(e) {
+  return 0.01745329251 * e;
+}
+!(function u() {
+  var e = Date.now();
+  100 <= e - c &&
+    (t.placeTrap && r(),
+    t.placeSpike && d(),
+    t.placeTeleport && i(),
+    t.placeFood && l(),
+    t.placeMill && y(),
+    (c = e)),
+    requestAnimationFrame(u);
+})();
+
+
