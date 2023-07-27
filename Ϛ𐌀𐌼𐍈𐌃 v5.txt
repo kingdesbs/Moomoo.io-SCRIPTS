@@ -1,0 +1,1525 @@
+// ==UserScript==
+// @name          Ϛ𐌀𐌼𐍈𐌃  [Q-ABS][R-INSTA][N-MILLS][T-LAG INSTA][Y-1FRAME][C - BOOST 1 TICK(NEED FIX)][ctrl-AutoInsta][- bow insta][write in chat !crash and game was crash][M-Mills]
+// @namespace
+// @version      v5
+// @description  bozo
+// @author       Hand
+// @match        *://moomoo.io/*
+// @match        *://sandbox.moomoo.io/*
+// @icon        https://media.discordapp.net/attachments/1075273708471595069/1096248764953542727/image0.gif
+// @grant        none
+// @require https://greasyfork.org/scripts/368273-msgpack/code/msgpack.js?version=598723
+// @require http://code.jquery.com/jquery-3.3.1.min.js
+// @require https://code.jquery.com/ui/1.12.0/jquery-ui.min.js
+// @require https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js
+// @require https://greasyfork.org/scripts/368273-msgpack/code/msgpack.js?version=598723A
+// @require http://code.jquery.com/jquery-3.3.1.min.js
+// @require https://code.jquery.com/ui/1.12.0/jquery-ui.min.js
+// @require https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js
+// @require https://cdn.jsdelivr.net/gh/emn178/js-sha3/build/sha3.min.js
+// @require https://ksw2-center.glitch.me/users/fzb/msgpack.js
+// @downloadURL none
+// ==/UserScript==
+
+document.getElementById('gameName').style.color = "#008000";
+document.getElementById('gameName').style = "text-shadow: #44944A 1px 1px 10px;";
+document.getElementById('gameName').innerHTML = '🐒CaMoD🐵';
+document.getElementById("woodDisplay").style.color = "#0000FF";
+document.getElementById("stoneDisplay").style.color = "#FF0000";
+document.getElementById("killCounter").style.color = "#c0c0c0";
+document.getElementById("foodDisplay").style.color = "#ffffff"
+document.getElementById("scoreDisplay").style.color = "#ffff57";
+(function() {
+    var Mill1;
+    var Mill2;
+    var Mill3;
+    var MillMod = true;
+document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 77 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        AutoMill = (AutoMill + 1) % 2;
+            if (AutoMill == 0) {
+                doNewSend(["ch", [""]]);
+            }else {
+                doNewSend(["ch", ["Handmills"]]);
+            }
+                e.preventDefault();
+                if (MillMod) {
+                    Mill1 = setTimeout(function() {
+                        h1();
+                    }, 0);
+                } else {
+                    clearTimeout(Mill1);
+                    clearTimeout(Mill2);
+                    clearTimeout(Mill3);
+                                    }
+                MillMod = !MillMod;
+            }
+        }
+    );
+
+
+
+    function h1() {
+        clearTimeout(Mill1);
+        place(millType, myPlayer.dir + toRad(90.00000000000000000066));
+        place(millType, myPlayer.dir - toRad(90.00000000000000000052));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h1();
+        }, 130);
+    }
+    function h2() {
+        clearTimeout(Mill2);
+        place(millType, myPlayer.dir + toRad(90.00000000000000000071));
+        place(millType, myPlayer.dir - toRad(90.00000000000000000042));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h2();
+        }, 130);
+    }
+        function h3() {
+        clearTimeout(Mill2);
+        place(millType, myPlayer.dir + toRad(90.00000000000000000081));
+        place(millType, myPlayer.dir - toRad(90.00000000000000000072));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h3();
+        }, 130);
+    }
+})();
+
+(function() {
+    var Gay1;
+    var Gay2;
+    var Gay3;
+    var GayMod = true;
+document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 81 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        AutoMill = (AutoMill + 1) % 2;
+            if (AutoMill == 0) {
+                doNewSend(["ch", ["ABS : disable"]]);
+                document.title = "AutoGay:Off"
+            }else {
+                doNewSend(["ch", ["ABS : enabe"]]);
+                document.title = "AutoGay:On"
+            }
+                e.preventDefault();
+                if (GayMod) {
+                    Gay1 = setTimeout(function() {
+                        h1();
+                    }, 0);
+                } else {
+                    clearTimeout(Gay1);
+                    clearTimeout(Gay2);
+                    clearTimeout(Gay3);
+                                    }
+            GayMod = !GayMod;
+            }
+        }
+    );
+
+
+
+    function h1() {
+        clearTimeout(Mill1);
+        place(spikeType, myPlayer.dir + toRad(45));
+        place(spikeType, myPlayer.dir - toRad(45));
+        Gay1 = setTimeout(function() {
+            h1();
+        }, 200);
+    }
+})();
+
+window.onbeforeunload = null;
+
+let mouseX;
+let mouseY;
+
+let width;
+let height;
+
+
+var antiinsta = true
+
+setInterval( () => {
+        if(autobreak) {
+                    if(nearestEnemy) {
+                                    nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
+                                   if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 120) {
+                               doNewSend(["ch", ["Right next to me gay"]]);
+            }
+        }
+    }
+}, 10);
+
+
+
+
+setInterval( () => {
+    if(AutoInsta) {
+        if(nearestEnemy) {
+            nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
+            if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 120) {
+        autoaim = true;
+    doNewSend(["ch", ["AutoGG"]]);
+        doNewSend(["5", [primary, true]]);
+        doNewSend(["13c", [1, 7, 0]]);
+        doNewSend(["13c", [0, 7, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 18, 1]]);
+        place(spikeType, myPlayer.dir + toRad(90));
+        place(spikeType, myPlayer.dir - toRad(90));
+        place(spikeType, myPlayer.dir - toRad(0));
+        place(spikeType, myPlayer.dir - toRad(180));
+            autoaim = false;
+            }
+        }
+    }
+}, 1000);
+
+setInterval(() => {
+    if(autoaim == true) {
+        doNewSend(["2", [nearestEnemyAngle]]);
+    }
+}, 0);
+
+setInterval(() => {
+    if(hatToggle == 1) {
+        if(oldHat != normalHat) {
+            hat(normalHat);
+            console.log("Tried. - Hat")
+        }
+        if(oldAcc != normalAcc) {
+            acc(normalAcc);
+            console.log("Tried. - Acc")
+        }
+        oldHat = normalHat;
+        oldAcc = normalAcc
+    }
+}, 25);
+
+function normal() {
+    hat(normalHat);
+    acc(normalAcc);
+}
+
+function aim(x, y){
+     var cvs = document.getElementById("gameCanvas");
+     cvs.dispatchEvent(new MouseEvent("mousemove", {
+         clientX: x,
+         clientY: y
+
+     }));
+}
+
+let coreURL = new URL(window.location.href);
+window.sessionStorage.force = coreURL.searchParams.get("fc");
+
+const CanvasAPI = document.getElementById("gameCanvas")
+CanvasAPI.addEventListener("mousedown", buttonPressD, false);
+    function buttonPressD(e) {
+    if (e.button == 2) {
+        doNewSend(["ch", [""]]);
+        hat(40);
+        acc(21);
+        doNewSend(["7", [1]])
+        setTimeout( () => {
+               hat(6);
+            acc(11);
+            doNewSend(["7", [1]])
+             }, 100);
+    }
+        if (e.button == 1) {
+                                doNewSend(["5", [secondary, true]]);
+                                setTimeout( () => {
+               hat(53);
+            acc(21);
+                }, 100);
+                    setTimeout( () => {
+               hat(6);
+            acc(11);
+                 }, 440);
+    }
+
+                if (e.button == 0) {
+         doNewSend(["5", [primary, true]]);
+       hat(7);
+        acc(18)
+        setTimeout( () => {
+            doNewSend(["7", [1]]);
+          hat(12);
+            acc(11)
+        }, 200);
+                        setTimeout( () => {
+            doNewSend(["7", [1]])
+                 }, 200);
+     }
+ }
+
+
+let vengeance = 0;
+let trap_a = null;
+let intrap = false;
+let trapid = null;
+let trap = {
+    x: 0,
+    y: 0
+}
+var AutoMill = 0;
+var nearestEnemy;
+var nearestEnemyAngle;
+var autobreak = false;
+var isEnemyNear;
+var instaSpeed=200;
+var AutoInsta = false;
+var primary;
+var secondary;
+var foodType;
+var wallType;
+var spikeType;
+var millType;
+var mineType;
+var boostType;
+var turretType;
+var spawnpadType;
+var autoaim = false;
+var tick = 1;
+var oldHat;
+var oldAcc;
+var enemiesNear;
+var normalHat;
+var normalAcc;
+var ws;
+var msgpack5 = msgpack;
+var boostDir;
+let myPlayer = {
+    id: null,
+    x: null,
+    y: null,
+    dir: null,
+    object: null,
+    weapon: null,
+    clan: null,
+    isLeader: null,
+    hat: null,
+    accessory: null,
+    isSkull: null
+};
+let EnemyPlayer = {
+    id: null,
+    x: null,
+    y: null,
+    dir: null,
+    object: null,
+    weapon: null,
+    clan: null,
+    isLeader: null,
+    hat: null,
+    accessory: null,
+    isSkull: null
+};
+
+let healSpeed = 90;
+
+var messageToggle = 0;
+var clanToggle = 0;
+let ab = 0;
+let ai = 0;
+let healToggle = 1;
+let hatToggle = 1;
+var PREFIX = "!";
+
+
+document.msgpack = msgpack;
+function n(){
+     this.buffer = new Uint8Array([0]);
+     this.buffer.__proto__ = new Uint8Array;
+     this.type = 0;
+}
+
+WebSocket.prototype.oldSend = WebSocket.prototype.send;
+WebSocket.prototype.send = function(m){
+    if (!ws){
+        document.ws = this;
+
+        ws = this;
+        socketFound(this);
+    }
+    this.oldSend(m);
+};
+
+function socketFound(socket){
+    socket.addEventListener('message', function(message){
+        handleMessage(message);
+    });
+}
+function handleMessage(m){
+    let temp = msgpack5.decode(new Uint8Array(m.data));
+    let data;
+    if(temp.length > 1) {
+        data = [temp[0], ...temp[1]];
+        if (data[1] instanceof Array){
+            data = data;
+        }
+    } else {
+      data = temp;
+    }
+    let item = data[0];
+    if(!data) {return};
+
+        if (data[0] == "ch" && data[1] == myPlayer.id && data[2].split(' ') == PREFIX+"Crash") {
+           doNewSend(["6", [12]]);
+           doNewSend(["6", [15]]);
+        setTimeout(() => {
+        },500);
+    }
+
+    if(item === "io-init") {
+            let cvs = document.getElementById("gameCanvas");
+            width = cvs.clientWidth;
+            height = cvs.clientHeight;
+            $(window).resize(function() {
+                width = cvs.clientWidth;
+                height = cvs.clientHeight;
+            });
+            cvs.addEventListener("mousemove", e => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+        }
+    function chat(e) {
+    doNewSend(["ch", [e]])
+}
+    if (item == "1" && myPlayer.id == null){
+        myPlayer.id = data[1];
+    }
+
+
+    if (item == "33") {
+        enemiesNear = [];
+        for(let i = 0; i < data[1].length / 13; i++) {
+            let playerInfo = data[1].slice(13*i, 13*i+13);
+            if(playerInfo[0] == myPlayer.id) {
+                myPlayer.x = playerInfo[1];
+                myPlayer.y = playerInfo[2];
+                myPlayer.dir = playerInfo[3];
+                myPlayer.object = playerInfo[4];
+                myPlayer.weapon = playerInfo[5];
+                myPlayer.clan = playerInfo[7];
+                myPlayer.isLeader = playerInfo[8];
+                myPlayer.hat = playerInfo[9];
+                myPlayer.accessory = playerInfo[10];
+                myPlayer.isSkull = playerInfo[11];
+            } else if(playerInfo[7] != myPlayer.clan || playerInfo[7] === null) {
+                enemiesNear.push(playerInfo);
+            }
+        }
+    }
+
+    isEnemyNear = false;
+    if(enemiesNear) {
+        nearestEnemy = enemiesNear.sort((a,b) => dist(a, myPlayer) - dist(b, myPlayer))[0];
+    }
+
+
+    if(nearestEnemy) {
+        nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
+        if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 300) {
+            isEnemyNear = true;
+            if(autoaim == true && myPlayer.hat != 7 && myPlayer.hat != 53) {
+                normalHat = 6;
+                if(primary != 8) {
+                    normalAcc = 21
+                }
+            };
+        }
+    }
+    if(isEnemyNear == false && autoaim == false) {
+        normalAcc = 21;
+        if (myPlayer.y < 2400){
+            normalHat = 15;
+        } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+            normalHat = 31;
+        } else {
+	        normalHat = 6;
+        }
+    }
+    if (!nearestEnemy) {
+        nearestEnemyAngle = myPlayer.dir;
+
+    if (item == 'h' && data[1] == myPlayer.id) {
+        if (data[2] <= 21 && data[2] > 0 && antiinsta == true) {
+            chat("AntiRevInst")
+            hat(6)
+            place(foodType);//eat Bobik
+            place(foodType);//eat Bobik
+        }
+        if (data[2] <= 55 && data[2] > 0 && antiinsta == true) {
+                        chat("Antihit")
+                        hat(6);
+            place(foodType);//eat Bobik
+        }
+        if (data[2] <= 60 && data[2] > 0 && antiinsta == true) {
+                        chat("AntiInsta")
+            hat(6);
+            acc(18)
+            place(foodType);//eat Bobik
+            setTimeout( () => {
+                hat(11)
+                acc(21)
+            }, 80);
+            setTimeout( () => {
+                hat(6);
+            }, 760);
+            setTimeout( () => {
+                hat(6);
+            }, 1900);
+        }
+    }
+
+    }
+    if(item == "h" && data[1] == myPlayer.id) {
+        if(data[2] < 100 && data[2] > 0 && healToggle == 1) { // place  place(foodType);
+            setTimeout( () => {
+               place(foodType, null);
+             }, healSpeed);
+        }
+    }
+    update();
+
+}
+function doNewSend(sender){
+    ws.send(new Uint8Array(Array.from(msgpack5.encode(sender))));
+}
+
+function acc(id) {
+    doNewSend(["13c", [0, 0, 1]]);
+    doNewSend(["13c", [0, id, 1]]);
+}
+
+function hat(id) {
+    doNewSend(["13c", [0, id, 0]]);
+}
+
+
+function place(id, angle = Math.atan2(mouseY - height / 2, mouseX - width / 2)) {
+    doNewSend(["5", [id, null]]);
+    doNewSend(["c", [1, angle]]);
+    doNewSend(["c", [0, angle]]);
+    doNewSend(["5", [myPlayer.weapon, true]]);
+}
+function placeQ(id, angle = Math.atan2(mouseY - height / 2, mouseX - width / 2)) {
+    doNewSend(["5", [id, null]]);
+    doNewSend(["c", [1, angle]]);
+    doNewSend(["c", [0, angle]]);
+    doNewSend(["5", [myPlayer.weapon, true]]);
+}
+function healer() {
+               place(foodType, null);
+               place(foodType, null);
+}
+function fourSpawnpad() {
+       place(spawnpadType, myPlayer.dir + toRad(135));
+       place(spawnpadType, myPlayer.dir + toRad(150));
+       place(spawnpadType, myPlayer.dir + toRad(165));
+       place(spawnpadType, myPlayer.dir + toRad(180));
+       place(spawnpadType, myPlayer.dir + toRad(195));
+       place(spawnpadType, myPlayer.dir + toRad(210));
+       place(spawnpadType, myPlayer.dir + toRad(225));
+       place(spawnpadType, myPlayer.dir + toRad(240));
+       place(spawnpadType, myPlayer.dir + toRad(255));
+       place(spawnpadType, myPlayer.dir + toRad(270));
+       place(spawnpadType, myPlayer.dir + toRad(285));
+       place(spawnpadType, myPlayer.dir + toRad(300));
+       place(spawnpadType, myPlayer.dir + toRad(315));
+       place(spawnpadType, myPlayer.dir + toRad(330));
+       place(spawnpadType, myPlayer.dir + toRad(345));
+       place(spawnpadType, myPlayer.dir + toRad(360));
+}
+function boostSpike() {
+    if(boostDir == null) {
+        boostDir = nearestEnemyAngle;
+    }
+    place(spikeType, boostDir + toRad(90));
+    place(spikeType, boostDir - toRad(90));
+    place(boostType, boostDir - toRad(180));
+    place(boostType, boostDir - toRad(0));
+    doNewSend(["33", [boostDir]]);
+}
+
+
+var repeater = function(key, action, interval) {
+    let _isKeyDown = false;
+    let _intervalId = undefined;
+
+    return {
+        start(keycode) {
+            if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                _isKeyDown = true;
+                if(_intervalId === undefined) {
+                    _intervalId = setInterval(() => {
+                        action();
+                        if(!_isKeyDown){
+                            clearInterval(_intervalId);
+                            _intervalId = undefined;
+                            console.log("claered");
+                        }
+                    }, interval);
+                }
+            }
+        },
+
+        stop(keycode) {
+            if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                _isKeyDown = false;
+            }
+        }
+    };
+
+
+}
+
+const healer1 = repeater(51, () => {placeQ(foodType, boostDir);
+                                    placeQ(foodType, boostDir)}, 60);
+const healer2 = repeater(81, () => {placeQ(foodType, boostDir);
+                                    placeQ(foodType, boostDir)}, 60);
+const boostPlacer = repeater(70, () => {place(boostType)}, 60);
+const spikePlacer = repeater(86, () => {place(spikeType)}, 60);
+const millPlacer = repeater(78, () => {place(millType)}, 60);
+const turretPlacer = repeater(72, () => {place(turretType)}, 57);
+const fourSpawnpads = repeater(75, fourSpawnpad, 60);
+
+document.addEventListener('keydown', (e)=>{
+    spikePlacer.start(e.keyCode);
+    healer1.start(e.keyCode);
+    healer2.start(e.keyCode);
+    boostPlacer.start(e.keyCode);
+    fourSpawnpads.start(e.keyCode);
+    millPlacer.start(e.keyCode);
+    turretPlacer.start(e.keyCode);
+
+    if (e.keyCode == 192 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        place(spikeType, myPlayer.dir + toRad(145));
+        place(spikeType, myPlayer.dir - toRad(145));
+        place(spikeType, myPlayer.dir + toRad(75));
+        place(spikeType, myPlayer.dir - toRad(75));
+        place(spikeType, myPlayer.dir - toRad(0));
+    }
+
+    if (e.keyCode == 71 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        place(spikeType, myPlayer.dir + toRad(90));
+        place(spikeType, myPlayer.dir - toRad(90));
+        place(boostType, myPlayer.dir - toRad(0));
+    }
+    if (e.keyCode == 16 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        if (myPlayer.y < 2400){
+            hat(15);
+            acc(11);
+        } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+            hat(31);
+            acc(11);
+        } else if (isEnemyNear == true){
+            hat(6);
+            acc(19);
+        } else {
+	        hat(12);
+            acc(11);
+        }
+    }
+    if (e.keyCode == 90 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+            hat(40);
+        acc(21);
+    }
+    if (e.keyCode == 66 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+            hat(6);
+            acc(19);
+    }
+    if (e.keyCode == 84 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hat(22);
+        acc(19);
+    }
+    if (e.keyCode == 74 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hat(7);
+        acc(18);
+    }
+    if (e.keyCode == 89 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hat(11);
+        acc(21);
+    }
+        if(e.keyCode == 17 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        AutoInsta = !AutoInsta
+        doNewSend(["ch", ["AutoGG:" + AutoInsta]]);
+    }
+            if(e.keyCode == 119 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autobreak = !autobreak
+        doNewSend(["ch", ["text :" + autobreak]]);
+    }
+
+    // Lag insta
+    if(e.keyCode == 84 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autoaim = true;
+        doNewSend(["5", [secondary, true]]);
+        doNewSend(["13c", [0, 53, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 21 , 1]]);
+        doNewSend(["c", [1]]);
+        setTimeout( () => {
+         var sck = "";
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["13c", [0, 7, 0]]);
+            doNewSend(["13c", [0, 0, 1]]);
+            doNewSend(["13c", [0, 18, 1]]);
+                             for(let i = 0; i < 865; i++){
+                    let caas = new Uint8Array(400);
+                    for(let i = 0; i <caas.length;i++){
+                        caas[i] = Math.floor(Math.random()*5);
+                        sck += caas[i]
+                    }
+                }
+                ws.send(caas);
+        }, 80);
+        setTimeout( () => {
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["c", [0, null]]);
+            doNewSend(["13c", [1, 12, 0]]);
+            doNewSend(["13c", [0, 12, 0]]);
+            doNewSend(["13c", [0, 0, 1]]);
+            doNewSend(["13c", [0, 11, 1]]);
+            autoaim = false;
+        }, 180);
+    }
+
+    // BOW INSTA
+    if (e.keyCode == 189 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+    autoaim = false;
+        doNewSend(["ch", ["Monkeybowinsta"]]);
+        doNewSend(["13c", [0, 53, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 21, 1]]);
+        doNewSend(["5", [secondary, true]]);
+            setTimeout(() => {
+                doNewSend(["7", [2]]);
+                    },120);
+    setTimeout(() => {
+        doNewSend(["6", [12]]);
+    },250);
+    setTimeout(() => {
+        doNewSend(["6", [15]]);
+        doNewSend(["13c", [0, 38, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 18, 1]]);
+    }, 250);
+    setTimeout(() => {
+        doNewSend(["5", [primary, true]]);
+        doNewSend(["7", [1]]);
+       doNewSend(["13c", [0, 6, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 21, 1]]);
+    }, 500);
+}
+
+ //rev3insta
+    if(e.keyCode == 67 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autoaim = true;
+        doNewSend(["13c", [0, 0, 0]]);
+        doNewSend(["13c", [0, 0, 18]]);
+        doNewSend(["ch", ["Monkey1tick"]]);
+        place(boostType, nearestEnemyAngle);
+        doNewSend(["13c", [1, 53, 0]]);
+        doNewSend(["5", [secondary, true]]);
+        doNewSend(["13c", [0, 53, 0]]);
+        doNewSend(["7", [2]]);
+        setTimeout(() => {
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["13c", [1, 7, 0]]);
+            doNewSend(["13c", [0, 7, 0]]);
+        }, 110);
+                setTimeout(() => {
+               doNewSend(["5", [secondary, true]]);
+            doNewSend(["13c", [0, 38, 0]]);
+            doNewSend(["13c", [1, 38, 0]]);
+            doNewSend(["13c", [0, 18, 1]]);
+            doNewSend(["13c", [1, 18, 1]]);
+                            }, 230);
+        setTimeout(() => {
+            doNewSend(["13c", [0, 0, 0]]);
+            doNewSend(["7", [1]]);
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["13c", [0, 6, 0]]);
+            doNewSend(["13c", [1, 6, 0]]);
+            doNewSend(["13c", [0, 11, 1]]);
+            doNewSend(["13c", [1, 11, 1]]);
+            autoaim = false;
+        }, 400);
+    }
+    //1 FraRme
+    if(e.keyCode == 89 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+             autoaim = true;
+                doNewSend(["ch", ["Monkey1frame"]]);
+        doNewSend(["13c", [0, 0, 0]]);
+        doNewSend(["13c", [0, 0, 18]]);
+        doNewSend(["13c", [1, 53, 0]]);
+        doNewSend(["13c", [0, 53, 0]]);
+        setTimeout(() => {
+            doNewSend(["13c", [1, 7, 0]]);
+            doNewSend(["13c", [0, 7, 0]]);
+            doNewSend(["5", [primary, true]]);
+        doNewSend(["7", [2]]);
+        }, 80);
+        setTimeout(() => {
+        doNewSend(["13c", [0, 38, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 18, 1]]);
+                    }, 180);
+                setTimeout(() => {
+            doNewSend(["7", [1]]);
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["13c", [0, 12, 0]]);
+            doNewSend(["13c", [1, 12, 0]]);
+            doNewSend(["13c", [0, 11, 1]]);
+            doNewSend(["13c", [1, 11, 1]]);
+            autoaim = false;
+        }, 360);
+         }
+
+// instakill
+    if(e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autoaim = true;
+        doNewSend(["ch", ["MonkeyInsta"]]);
+        doNewSend(["5", [primary, true]]);
+        doNewSend(["13c", [0, 7, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 21, 1]]);
+        doNewSend(["c", [1]]);
+        setTimeout( () => {
+            doNewSend(["13c", [0, 53, 0]]);
+            doNewSend(["5", [secondary, true]]);
+        }, 80);
+        setTimeout( () => {
+        doNewSend(["13c", [0, 38, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 18, 1]]);
+         }, 200);
+        setTimeout( () => {
+            doNewSend(["c", [0, null]]);
+            doNewSend(["13c", [0, 12, 0]]);
+            doNewSend(["13c", [0, 11, 1]]);
+            autoaim = false;
+           doNewSend(["5", [primary, true]]);
+        }, 400);
+    }
+
+    if(e.keyCode == 97 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [4]]);
+    }
+    if(e.keyCode == 98 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [15]]);
+    }
+    if(e.keyCode == 98 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [12]]);
+    }
+    if(e.keyCode == 105 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [28]]);
+    }
+    if(e.keyCode == 104 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [21]]);
+    }
+    if(e.keyCode == 101 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [25]]);
+    }
+    if(e.keyCode == 102 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [13]]);
+    }
+    if(e.keyCode == 99 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [2]]);
+    }
+
+    if(e.keyCode == 188 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        healToggle = (healToggle + 1) % 2;
+        if(healToggle == 0) {
+            if(hatToggle == 0) {
+            } else {
+            }
+        } else {
+            if(hatToggle == 0) {
+            } else {
+            }
+        }
+    }
+
+    if(e.keyCode == 190 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hatToggle = (hatToggle + 1) % 2;
+        if(healToggle == 0) {
+            if(hatToggle == 0) {
+            } else {
+            }
+        } else {
+            if(hatToggle == 0) {
+            } else {
+            }
+        }
+    }
+})
+
+document.addEventListener('keyup', (e)=>{
+    spikePlacer.stop(e.keyCode);
+    boostPlacer.stop(e.keyCode);
+    fourSpawnpads.stop(e.keyCode);
+    millPlacer.stop(e.keyCode);
+    turretPlacer.stop(e.keyCode);
+    healer1.stop(e.keyCode);
+    healer2.stop(e.keyCode);
+    if(e.keyCode == 0 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        setTimeout( () => {
+            doNewSend(["33", [null]]);
+            boostDir = null;
+        }, 10);
+    }
+})
+
+
+function isElementVisible(e) {
+    return (e.offsetParent !== null);
+}
+
+
+function toRad(angle) {
+    return angle * 0.01745329251;
+}
+
+function dist(a, b){
+    return Math.sqrt( Math.pow((b.y-a[2]), 2) + Math.pow((b.x-a[1]), 2) );
+}
+
+function animate(space, chance) {
+    let result = '';
+    let characters;
+    if(space) {
+        characters = '';
+    } else {
+        characters = '';
+    }
+    if(space) {
+        characters = characters.padStart((30 - characters.length) / 2 + characters.length)
+        characters = characters.padEnd(30);
+    }
+    let count = 0;
+    for (let i = 0; i < characters.length; i++ ) {
+       if(Math.floor(Math.random() * chance) == 1 && characters.charAt(i) != "-" && count < 2 && characters.charAt(i) != " ") {
+           result += " ";
+           count++
+       } else {
+           result += characters.charAt(i);
+       }
+    }
+    return result;
+}
+
+document.title = "Gay.io"
+
+function update() {
+    for (let i=0;i<9;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            primary = i;
+        }
+    }
+
+    for (let i=9;i<16;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            secondary = i;
+        }
+    }
+
+    for (let i=16;i<19;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            foodType = i - 16;
+        }
+    }
+
+    for (let i=19;i<22;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            wallType = i - 16;
+        }
+    }
+
+    for (let i=22;i<26;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            spikeType = i - 16;
+        }
+    }
+
+    for (let i=26;i<29;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            millType = i - 16;
+        }
+    }
+
+    for (let i=29;i<31;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            mineType = i - 16;
+        }
+    }
+
+    for (let i=31;i<33;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            boostType = i - 16;
+        }
+    }
+
+    for (let i=33;i<36;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            turretType = i - 16;
+        }
+    }
+
+    for (let i=36;i<37;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            spawnpadType = i - 16;
+        }
+    }
+
+    for (let i=37;i<39;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            turretType = i - 16;
+        }
+    }
+}
+//reload bars
+window.primaryReloadColor = "#00538a";
+window.secondaryReloadColor = "#00538a";
+
+try {
+
+    function log(asdas) {
+        console.log(asdas);
+    }
+
+    let maxScreenWidth = 1920;
+    let maxScreenHeight = 1080;
+    let screenWidth;
+    let screenHeight;
+    let screenW = maxScreenWidth / 2;
+    let screenH = maxScreenHeight / 2;
+    let delta;
+    let now;
+    let lastUpdate = Date.now();
+    let camX;
+    let camY;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let gameCanvas = document.getElementById("gameCanvas");
+    let mainContext = gameCanvas.getContext("2d");
+
+    let config = window.config;
+    config.tickRate = (1000 / 9);
+
+    let players = [];
+    let tmpObj = new Map();
+    let player = new Map();
+
+    function findPlayerByID(id) {
+        for (var i = 0; i < players.length; ++i) {
+            if (players[i].id == id) {
+                return players[i];
+            }
+        }
+        return null;
+    }
+
+    function findPlayerBySID(sid) {
+        for (var i = 0; i < players.length; ++i) {
+            if (players[i].sid == sid) {
+                return players[i];
+            }
+        }
+        return null;
+    }
+
+    let items = {
+        weapons: [{
+            speed: 300
+        }, {
+            speed: 400
+        }, {
+            speed: 400
+        }, {
+            speed: 300
+        }, {
+            speed: 300
+        }, {
+            speed: 700
+        }, {
+            speed: 300
+        }, {
+            speed: 100
+        }, {
+            speed: 400
+        }, {
+            speed: 600
+        }, {
+            speed: 400
+        }, {
+            speed: 1
+        }, {
+            speed: 700
+        }, {
+            speed: 230
+        }, {
+            speed: 700
+        }, {
+            speed: 1500
+        }]
+    }
+    function setData(tmpObj, data) {
+        tmpObj.id = data[0];
+        tmpObj.sid = data[1];
+        tmpObj.name = data[2];
+        tmpObj.x = data[3];
+        tmpObj.y = data[4];
+        tmpObj.dir = data[5];
+        tmpObj.health = data[6];
+        tmpObj.maxHealth = data[7];
+        tmpObj.scale = data[8];
+        tmpObj.skinColor = data[8];
+        tmpObj.reloads = {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0,
+            9: 0,
+            10: 0,
+            11: 0,
+            12: 0,
+            13: 0,
+            14: 0,
+            15: 0,
+            53: 0
+        };
+        tmpObj.primaryIndex = undefined;
+        tmpObj.secondaryIndex = undefined;
+        tmpObj.gatherIndex = undefined;
+        tmpObj.shootIndex = undefined;
+        tmpObj.gathering = 0;
+        tmpObj.shooting = {};
+    }
+
+    let UTILS = {
+        getDist: function (tmp1, tmp2, type1, type2) {
+            let tmpXY1 = {
+                x: type1 == 0 ? tmp1.x : type1 == 1 ? tmp1.x1 : type1 == 2 && tmp1.x2,
+                y: type1 == 0 ? tmp1.y : type1 == 1 ? tmp1.y1 : type1 == 2 && tmp1.y2
+            }
+            let tmpXY2 = {
+                x: type2 == 0 ? tmp2.x : type2 == 1 ? tmp2.x1 : type2 == 2 && tmp2.x2,
+                y: type2 == 0 ? tmp2.y : type2 == 1 ? tmp2.y1 : type2 == 2 && tmp2.y2
+            }
+            return Math.sqrt((tmpXY2.x -= tmpXY1.x) * tmpXY2.x + (tmpXY2.y -= tmpXY1.y) * tmpXY2.y);
+        },
+        getDirect: function (tmp1, tmp2, type1, type2) {
+            let tmpXY1 = {
+                x: type1 == 0 ? tmp1.x : type1 == 1 ? tmp1.x1 : type1 == 2 && tmp1.x2,
+                y: type1 == 0 ? tmp1.y : type1 == 1 ? tmp1.y1 : type1 == 2 && tmp1.y2
+            }
+            let tmpXY2 = {
+                x: type2 == 0 ? tmp2.x : type2 == 1 ? tmp2.x1 : type2 == 2 && tmp2.x2,
+                y: type2 == 0 ? tmp2.y : type2 == 1 ? tmp2.y1 : type2 == 2 && tmp2.y2
+            }
+            return Math.atan2(tmpXY1.y - tmpXY2.y, tmpXY1.x - tmpXY2.x);
+        },
+        fixTo: function (n, v) {
+            return parseFloat(n.toFixed(v));
+        },
+        toRad: function (angle) {
+            return angle * (Math.PI / 180);
+        }
+    }
+
+    let inWindow = true;
+    window.onblur = function() {
+        inWindow = false;
+    };
+    window.onfocus = function() {
+        inWindow = true;
+    };
+
+    let msgPack = window.msgpack;
+    let WS;
+
+    WebSocket.prototype.tmpSend = WebSocket.prototype.send;
+    WebSocket.prototype.send = function (message) {
+        if (!WS) {
+            WS = this;
+            WS.addEventListener("message", function(msg) {
+                getMessage(msg);
+            });
+        }
+        this.tmpSend(message);
+    }
+
+    window.addEventListener('resize', resize);
+
+    function resize() {
+        screenWidth = window.innerWidth;
+        screenHeight = window.innerHeight;
+    }
+    resize();
+
+    function getMessage(message) {
+        let data = new Uint8Array(message.data);
+        let decode = msgPack.decode(data);
+        let packetList = {
+            "id": "setInitData",
+            "d": "disconnect",
+            "1": "setupGame",
+            "2": "addPlayer",
+            "4": "removePlayer",
+            "33": "updatePlayers",
+            "5": "updateLeaderboard",
+            "6": "loadGameObject",
+            "a": "loadAI",
+            "aa": "animateAI",
+            "7": "gatherAnimation",
+            "8": "wiggleGameObject",
+            "sp": "shootTurret",
+            "9": "updatePlayerValue",
+            "h": "updateHealth",
+            "11": "killPlayer",
+            "12": "killObject",
+            "13": "killObjects",
+            "14": "updateItemCounts",
+            "15": "updateAge",
+            "16": "updateUpgrades",
+            "17": "updateItems",
+            "18": "addProjectile",
+            "19": "remProjectile",
+            "20": "serverShutdownNotice",
+            "ac": "addAlliance",
+            "ad": "deleteAlliance",
+            "an": "allianceNotification",
+            "st": "setPlayerTeam",
+            "sa": "setAlliancePlayers",
+            "us": "updateStoreItems",
+            "ch": "receiveChat",
+            "mm": "updateMinimap",
+            "t": "showText",
+            "p": "pingMap",
+            "pp": "pingSocketResponse"
+        };
+        let packet = {
+            name: packetList[decode[0]],
+            arg: function (data) {
+                return decode[1][data]
+            }
+        }
+        let checkName = function (name) {
+            return packet.name === name;
+        }
+        if (checkName("setupGame")) {
+            player.sid = packet.arg(0);
+        }
+        if (checkName("addPlayer")) {
+            let data = packet.arg(0);
+            let isYou = packet.arg(1);
+            let tmpPlayer = findPlayerByID(data[0]);
+            if (!tmpPlayer) {
+                tmpPlayer = new Map();
+                players.push(tmpPlayer);
+            }
+            tmpPlayer.visible = false;
+            tmpPlayer.x2 = undefined;
+            tmpPlayer.y2 = undefined;
+            setData(tmpPlayer, data);
+            if (isYou) {
+                player = tmpPlayer;
+                camX = player.x;
+                camY = player.y;
+            }
+        }
+        if (checkName("removePlayer")) {
+            let id = packet.arg(0);
+            for (var i = 0; i < players.length; i++) {
+                if (players[i].id == id) {
+                    players.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        if (checkName("updatePlayers")) {
+            let data = packet.arg(0);
+            let tmpTime = Date.now();
+            for (let i = 0; i < players.length; ++i) {
+                players[i].forcePos = !players[i].visible;
+                players[i].visible = false;
+            }
+            for (let i = 0; i < data.length;) {
+                tmpObj = findPlayerBySID(data[i]);
+                if (tmpObj) {
+                    tmpObj.t1 = (tmpObj.t2 === undefined) ? tmpTime : tmpObj.t2;
+                    tmpObj.t2 = tmpTime;
+                    tmpObj.x1 = tmpObj.x;
+                    tmpObj.y1 = tmpObj.y;
+                    tmpObj.x2 = data[i + 1];
+                    tmpObj.y2 = data[i + 2];
+                    tmpObj.dt = 0;
+                    tmpObj.buildIndex = data[i + 4];
+                    tmpObj.weaponIndex = data[i + 5];
+                    tmpObj.visible = true;
+                    if (tmpObj.weaponIndex < 9) {
+                        tmpObj.primaryIndex = tmpObj.weaponIndex;
+                    } else if (tmpObj.weaponIndex > 8) {
+                        tmpObj.secondaryIndex = tmpObj.weaponIndex;
+                    }
+                    if (tmpObj.shooting[53]) {
+                        tmpObj.shooting[53] = 0;
+                        tmpObj.reloads[53] = 2500 - config.tickRate;
+                    } else {
+                        if (tmpObj.reloads[53] > 0) {
+                            tmpObj.reloads[53] = Math.max(0, tmpObj.reloads[53] - config.tickRate);
+                        }
+                    }
+                    if (tmpObj.gathering || tmpObj.shooting[1]) {
+                        if (tmpObj.gathering) {
+                            tmpObj.gathering = 0;
+                            tmpObj.reloads[tmpObj.gatherIndex] = items.weapons[tmpObj.gatherIndex].speed * (tmpObj.skinIndex == 20 ? (0.78) : 1);
+                        }
+                        if (tmpObj.shooting[1]) {
+                            tmpObj.shooting[1] = 0;
+                            tmpObj.reloads[tmpObj.shootIndex] = items.weapons[tmpObj.shootIndex].speed * (tmpObj.skinIndex == 20 ? (0.78) : 1);
+                        }
+                    } else {
+                        if (tmpObj.buildIndex < 0) {
+                            if (tmpObj.reloads[tmpObj.weaponIndex] > 0) {
+                                tmpObj.reloads[tmpObj.weaponIndex] = Math.max(0, tmpObj.reloads[tmpObj.weaponIndex] - config.tickRate);
+                            }
+                        }
+                    }
+                }
+                i += 13;
+            }
+        }
+        if (checkName("gatherAnimation")) {
+            let sid = packet.arg(0);
+            let didHit = packet.arg(1);
+            let index = packet.arg(2);
+            tmpObj = findPlayerBySID(sid);
+            if (tmpObj) {
+                tmpObj.gatherIndex = index;
+                tmpObj.gathering = 1;
+            }
+        }
+        if (checkName("addProjectile")) {
+            let x = packet.arg(0);
+            let y = packet.arg(1);
+            let dir = packet.arg(2);
+            let range = packet.arg(3);
+            let speed = packet.arg(4);
+            let indx = packet.arg(5);
+            let layer = packet.arg(6);
+            let sid = packet.arg(7);
+            if (inWindow) {
+                let weaponIndx = indx == 0 ? 9 : indx == 2 ? 12 : indx == 3 ? 13 : indx == 5 && 15;
+                let projOffset = config.playerScale * 2;
+                let projXY = {
+                    x: indx == 1 ? x : x - (projOffset * Math.cos(dir)),
+                    y: indx == 1 ? y : y - (projOffset * Math.sin(dir))
+                }
+                let testXY = function(tmpObj) {
+                    return {
+                        x: tmpObj.x2 + ((tmpObj.x2 - tmpObj.x1) / 2),
+                        y: tmpObj.y2 + ((tmpObj.y2 - tmpObj.y1) / 2)
+                    };
+                }
+                let nearPlayer = players.filter(e => e.visible && UTILS.getDist(projXY, testXY(e), 0, 0) <= projOffset).sort(function(a, b) {
+                    return UTILS.getDist(projXY, testXY(a), 0, 0) - UTILS.getDist(projXY, testXY(b), 0, 0);
+                })[0];
+                if (nearPlayer) {
+                    if (indx == 1) {
+                        nearPlayer.shooting[53] = 1;
+                    } else {
+                        nearPlayer.shootIndex = weaponIndx;
+                        nearPlayer.shooting[1] = 1;
+                    }
+                }
+            }
+        }
+    }
+    let outlineColor = "#525252";
+    let darkOutlineColor = "#3d3f42";
+    function updateGame() {
+        if (player) {
+            let tmpXY = {
+                x: camX,
+                y: camY
+            };
+            let tmpDist = UTILS.getDist(tmpXY, player, 0, 0);
+            let tmpDir = UTILS.getDirect(player, tmpXY, 0, 0);
+            let camSpd = Math.min(tmpDist * 0.01 * delta, tmpDist);
+            if (tmpDist > 0.05) {
+                camX += camSpd * Math.cos(tmpDir);
+                camY += camSpd * Math.sin(tmpDir);
+            } else {
+                camX = player.x;
+                camY = player.y;
+            }
+        } else {
+            camX = config.mapScale / 2;
+            camY = config.mapScale / 2;
+        }
+        let lastTime = now - (1000 / config.serverUpdateRate);
+        let tmpDiff;
+        for (var i = 0; i < players.length; i++) {
+            tmpObj = players[i];
+            if (tmpObj && tmpObj.visible) {
+                if (tmpObj.forcePos) {
+                    tmpObj.x = tmpObj.x2;
+                    tmpObj.y = tmpObj.y2;
+                } else {
+                    let total = tmpObj.t2 - tmpObj.t1;
+                    let fraction = lastTime - tmpObj.t1;
+                    let ratio = (fraction / total);
+                    let rate = 170;
+                    tmpObj.dt += delta;
+                    let tmpRate = Math.min(1.7, tmpObj.dt / rate);
+                    let tmpDiff = (tmpObj.x2 - tmpObj.x1);
+                    tmpObj.x = tmpObj.x1 + (tmpDiff * tmpRate);
+                    tmpDiff = (tmpObj.y2 - tmpObj.y1);
+                    tmpObj.y = tmpObj.y1 + (tmpDiff * tmpRate);
+                }
+            }
+        }
+        let xOffset = camX - (maxScreenWidth / 2);
+        let yOffset = camY - (maxScreenHeight / 2);
+        for (let i = 0; i < players.length; ++i) {
+            tmpObj = players[i];
+            if (tmpObj.visible) {
+
+                mainContext.fillStyle = darkOutlineColor;
+                mainContext.roundRect(tmpObj.x - xOffset - config.healthBarWidth - config.healthBarPad + 50,
+                                      (tmpObj.y - yOffset + tmpObj.scale) + config.nameY - 13, config.healthBarWidth +
+                                      (config.healthBarPad * 2), 17, 8);
+                mainContext.fill();
+
+                mainContext.fillStyle = window.secondaryReloadColor;
+                mainContext.roundRect(tmpObj.x - xOffset - config.healthBarWidth + 50,
+                                      (tmpObj.y - yOffset + tmpObj.scale) + config.nameY - 13 + config.healthBarPad,
+                                      (config.healthBarWidth * (tmpObj.reloads[tmpObj.secondaryIndex] == undefined ? 1 : ((items.weapons[tmpObj.secondaryIndex].speed - tmpObj.reloads[tmpObj.secondaryIndex]) / items.weapons[tmpObj.secondaryIndex].speed))), 17 - config.healthBarPad * 2, 7);
+                mainContext.fill();
+
+                mainContext.fillStyle = darkOutlineColor;
+                mainContext.roundRect(tmpObj.x - xOffset - config.healthBarWidth - config.healthBarPad,
+                                      (tmpObj.y - yOffset + tmpObj.scale) + config.nameY - 13, config.healthBarWidth +
+                                      (config.healthBarPad * 2), 17, 8);
+                mainContext.fill();
+
+                mainContext.fillStyle = window.primaryReloadColor;
+                mainContext.roundRect(tmpObj.x - xOffset - config.healthBarWidth,
+                                      (tmpObj.y - yOffset + tmpObj.scale) + config.nameY - 13 + config.healthBarPad,
+                                      (config.healthBarWidth * (tmpObj.reloads[tmpObj.primaryIndex] == undefined ? 1 : ((items.weapons[tmpObj.primaryIndex].speed - tmpObj.reloads[tmpObj.primaryIndex]) / items.weapons[tmpObj.primaryIndex].speed))), 17 - config.healthBarPad * 2, 7);
+                mainContext.fill();
+            }
+        }
+
+    }
+    function doUpdate() {
+        now = Date.now();
+        delta = now - lastUpdate;
+        lastUpdate = now;
+        updateGame();
+        window.requestAnimFrame(doUpdate);
+    }
+    doUpdate();
+
+} catch (e) {
+    throw new Error(e);
+}
+
+
+// game grid
+
+// ==UserScript==
+// @name Moomoo.io Game grid removal
+// @author Murka
+// @description Removes the game grid
+// @icon https://moomoo.io/img/favicon.png?v=1
+// @version 0.3
+// @match *://moomoo.io/*
+// @match *://*.moomoo.io/*
+// @run-at document-start
+// @grant none
+// @license MIT
+// @namespace https://greasyfork.org/users/919633
+// ==/UserScript==
+/* jshint esversion:6 */
+
+/*
+    Author: Murka
+    Github: https://github.com/Murka007
+    Discord: https://discord.gg/sG9cyfGPj5
+    Greasyfork: https://greasyfork.org/en/users/919633
+    MooMooForge: https://github.com/MooMooForge
+*/
+
+(function() {
+    "use strict";
+
+    // Change to true or false
+    const GRID_ENABLED = false;
+    function inRange(value, min, max) {
+        return value > min && value < max;
+    }
+
+    function createHook(target, prop, callback) {
+        const symbol = Symbol(prop);
+        Object.defineProperty(target, prop, {
+            get() { return this[symbol]; },
+            set(value) { callback(this, symbol, value); },
+            configurable: true
+        })
+    }
+
+    createHook(window, "config", function(that, symbol, value) {
+        if (typeof value === "object" && value.hasOwnProperty("maxScreenHeight")) {
+            delete window.config;
+            Object.defineProperty(window, "config", {
+                value: value,
+                configurable: false,
+                writeable: false
+            })
+        }
+    })
+
+    CanvasRenderingContext2D.prototype.moveTo = new Proxy(CanvasRenderingContext2D.prototype.moveTo, {
+        apply(target, _this, args) {
+
+            if (!GRID_ENABLED) {
+                const [ x, y ] = args;
+                const { maxScreenWidth, maxScreenHeight } = window.config || {};;
+                if (inRange(x, 0, maxScreenWidth) || inRange(y, 0, maxScreenHeight)) return null;
+            }
+
+            return target.apply(_this, args);
+        }
+    })
+
+})();
+
+// rainbow healts
+let hue = 0;
+
+let replaceInterval = setInterval(() => {
+if (CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = ((oldFunc) => function() { if (this.fillStyle == "#030502") this.fillStyle = `hsl(${hue}, 100%, 50%)`; return oldFunc.call(this, ...arguments); })(CanvasRenderingContext2D.prototype.roundRect);
+  clearInterval(replaceInterval);
+}}, 10);
+
+function changeHue() {
+  hue += Math.random() * 3;
+}
+
+setInterval(changeHue, 10);
