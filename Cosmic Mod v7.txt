@@ -2,7 +2,7 @@
 // @name         ! Cosmic Mod v7 (Project Cosmic) (Obfuscate)
 // @namespace    -
 // @version      v7
-// @description  i dont know
+// @description  password: insanitymongayfrfr
 // @author       InsanityMon
 // @icon         https://cdn.discordapp.com/attachments/1082958297956618317/1105763950890582036/standard.gif
 // @match        *://moomoo.io/*
