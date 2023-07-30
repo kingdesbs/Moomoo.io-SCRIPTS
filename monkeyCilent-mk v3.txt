@@ -1,8 +1,8 @@
 // // ==UserScript==
-// @name        monkeyCilent-mk
-// @author       a random goose called bozo
-// @description  remake of star cilent
-// @version      v1.1
+// @name        monkeyCilent-mk but better
+// @author       bozo the egret :3
+// @description  skidded star cilent :v
+// @version      v3
 // @match        *://*.moomoo.io/*
 // @require      https://rawgit.com/kawanet/msgpack-lite/master/dist/msgpack.min.js
 // @run-at       document-end
@@ -14,6 +14,7 @@
 //added better autobuy
 //improved autoplace
 //improved heal
+//improved heal x2
 //improved anti
 /* unreleased moomoo servers
 vultr:1: New Jersey
@@ -147,13 +148,13 @@ function getTexturePackImg(id, type) {
 
 })();
 
-    document.getElementById("mainMenu").style.backgroundImage = "url('data:image/jpeg;base64,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')"
-    document.getElementById('enterGame').innerHTML = 'monkey go!';
+    document.getElementById("mainMenu").style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuw9QGOZsk0ssGK4ErM8_OybuEj1LtTnaCdQ&usqp=CAU')";
+    document.getElementById('enterGame').innerHTML = 'Start Game';
     document.getElementById('enterGame').style.color = 'text-shadow: red 1px 1px 40px;';
-    document.getElementById('nameInput').placeholder = ":)";
-    document.getElementById('diedText').innerHTML = 'rip monkey :<';
-    document.getElementById('gameName').innerHTML = 'monkeyCilent';
-    document.getElementById("leaderboard").append ('𝐋𝐞𝐚𝐝𝐞𝐫𝐁𝐨𝐚𝐫𝐝');
+    document.getElementById('nameInput').placeholder = ":/";
+    document.getElementById('diedText').innerHTML = '𝐈𝐦𝐚𝐠𝐢𝐧𝐞 𝐃𝐢𝐞';
+    document.getElementById('gameName').innerHTML = '𝐒𝐭𝐚𝐫𝐂𝐥𝐢𝐞𝐧𝐭';
+    document.getElementById("leaderboard").append ('ꜱᴛᴀʀ ᴄʟɪᴇɴᴛ');
     document.getElementById("leaderboard").style.color = "text-shadow: green 1px 1px 40px;";
 
 
@@ -487,10 +488,10 @@ function updateInnerHTML() {
     }, {
         name: "doSimpleAntiInsta",
         value: "simpleheal",
-        checked: true,
     }, {
         name: "doTickBasedHealing",
         value: "tickheal",
+        checked: true,
     }, {
         name: "doAutoSpikeTickOnReplaced",
         value: "spiketick",
@@ -506,7 +507,6 @@ function updateInnerHTML() {
     }, {
         name: "doClickCombat",
         value: "clicktype",
-        checked: true,
     }, {
         name: "doAutoSpinning",
         value: "spin",
@@ -518,7 +518,6 @@ function updateInnerHTML() {
     }, {
         name: "doShowStackedAnimtext",
         value: "stacktext",
-        checked: false,
     }, {
         name: "doDisableAnimtext",
         value: "hidetext",
@@ -533,11 +532,11 @@ function updateInnerHTML() {
     }, {
         name: "doAlwaysRevInsta",
         value: "alwaysrev",
-        checked: false,
+        selected: true,
     }, {
         name: "doBotMovementToNear",
         value: "botmove",
-        checked: false,
+        checked: true,
     }, ])}${HTML.newLine(1)}
     <div id = "freeCam">Freecam: none</div>
     Freecam hotkey: ${HTML.hotkey("freecumLOL", "/", "2", "1")}${HTML.newLine(1)}
@@ -551,7 +550,7 @@ function updateInnerHTML() {
     Zoom reset key: ${HTML.hotkey("zoomresetkey", "=", "2", "1")}${HTML.newLine(1)}
     Song hotkey: ${HTML.hotkey("songkey", "C", "2", "1")}${HTML.newLine(1)}
         <label for="ggezCh">AutoGG </label>
-        <input value="autoGG - Monkey Cilent" input="text" minlength="0" maxlength="30" id="ggezCh"><br>
+        <input value="autoGG - Monkey Cilent v3" input="text" minlength="0" maxlength="30" id="ggezCh"><br>
 <hr>
     Song: ${HTML.select("songs", [{
         name: "CRVN - Nobody",
@@ -14167,7 +14166,7 @@ function bConnect(token) {
         // UPDATE HEALTH:
         let healType = undefined;
         let guessEmpAnti = false;
-        let doEmpAntiInsta = true;
+        let doEmpAntiInsta = false;
         let judgeAtNextTick = false;
         let nearSpike = [];
 
@@ -14268,7 +14267,7 @@ function bConnect(token) {
             };
             let normalMS = 70;
             let goodMS = 125;
-            let antiInsta = true;
+            let antiInsta = false;
             let findAttacker = undefined;
             if (true) {
                 if (near.dist2 <= 300) {
@@ -14327,7 +14326,7 @@ function bConnect(token) {
             };
             let normalMS = 70;
             let goodMS = 125;
-            let antiInsta = true;
+            let antiInsta = false;
             if (true) {
                 if (nears.length) {
                     if (value >= 20) {
@@ -14510,7 +14509,7 @@ function bConnect(token) {
             count: 0,
         };
         //1.4201
-        let doAgeInsta = true;
+        let doAgeInsta = false;
         let instaC = {
             wait: false,
             can: false,
