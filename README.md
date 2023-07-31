@@ -1,1 +1,0 @@
-# Moomoo.io userscripts archive
