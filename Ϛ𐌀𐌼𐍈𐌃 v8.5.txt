@@ -1,16 +1,17 @@
 // ==UserScript==
-// @name          Ϛ𐌀𐌼𐍈𐌃  [Q-ABS][R-INSTA][N-MILLS][T-LAG INSTA][Y-1FRAME][C - BOOST 1 TICK(NEED FIX)][ctrl-AutoInsta][- bow insta][write in chat !crash and game was crash][M-Mills]
+// @name          Ϛ𐌀𐌼𐍈𐌃 TEST
 // @namespace
-// @version      v5
+// @version      v8.5
 // @description  bozo
 // @author       Hand
 // @match        *://moomoo.io/*
 // @match        *://sandbox.moomoo.io/*
-// @icon        https://media.discordapp.net/attachments/1075273708471595069/1096248764953542727/image0.gif
+// @match        *://moomoo.skids.info/*
+// @icon        https://tenor.com/view/twerk-gif-18988951
 // @grant        none
 // @require https://greasyfork.org/scripts/368273-msgpack/code/msgpack.js?version=598723
 // @require http://code.jquery.com/jquery-3.3.1.min.js
-// @require https://code.jquery.com/ui/1.12.0/jquery-ui.min.js
+// @require https://code.jquery.com/ui/1a.12.0/jquery-ui.min.js
 // @require https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js
 // @require https://greasyfork.org/scripts/368273-msgpack/code/msgpack.js?version=598723A
 // @require http://code.jquery.com/jquery-3.3.1.min.js
@@ -20,14 +21,465 @@
 // @require https://ksw2-center.glitch.me/users/fzb/msgpack.js
 // @downloadURL none
 // ==/UserScript==
+(function() {
+    'use strict';
+requestAnimationFrame = (a) => setTimeout(a, 1e3/6000)
+})();
 
-document.getElementById('gameName').style.color = "#008000";
-document.getElementById('gameName').style = "text-shadow: #44944A 1px 1px 10px;";
-document.getElementById('gameName').innerHTML = '🐒CaMoD🐵';
-document.getElementById("woodDisplay").style.color = "#0000FF";
-document.getElementById("stoneDisplay").style.color = "#FF0000";
-document.getElementById("killCounter").style.color = "#c0c0c0";
-document.getElementById("foodDisplay").style.color = "#ffffff"
+
+document.getElementById("storeHolder").style = "height: 1500px; width: 450px;"
+
+var ping = document.getElementById("pingDisplay");
+ping.replaceWith(document.createElement("a"));
+ping.style.fontSize = "10px";
+ping.style.display = "block";
+ping.style.zIndex = "1000000";
+document.body.appendChild(ping);
+
+    var kills = 10;
+
+    setInterval(getkills, 250);
+
+    function getkills(){
+        var count = parseInt(document.getElementById("killCounter").innerText);
+        if(count > kills){
+        setTimeout(()=>{
+            doNewSend(["ch", ["Lost players=>"+count+""]]);
+        }, 80);
+        setTimeout(()=>{
+            doNewSend(["ch", ["+1$ from Nigga"]]);
+        }, 700);
+        }
+        kills = count;
+        }
+    //more fps
+    window.location.native_resolution = true;
+
+//${generateNewToggle
+var toggles = {};
+window.toggles = toggles;
+function generateNewToggle(label, id, isChecked, style) {
+    toggles[id] = function () {
+        return document.getElementById(id).checked;
+    };
+    return `
+            ${label} <input type="checkbox" style="cursor: pointer;${
+    style ? " " + style : ""
+}" id="${id}" ${isChecked}>
+            `;
+}
+//${generateNewList
+function generateNewList(label, id, configs) {
+    let content = `${label} <select id="${id}">`;
+    for (let i = 0; i < configs.length; i++) {
+        content += `<option value="${configs[i][0]}">${configs[i][1]}</option>`;
+    }
+    content += `</select>`;
+    return content;
+}
+function setConfig(elements, id) {
+    for(let i = 0; i < elements.length; i++) {
+        document.getElementById(elements[i][3]).style.display = id == elements[i][0] ? "inline-block" : "none";
+    }
+}
+function addEventListen(id, configs) {
+    let interval = setInterval(() => {
+        if(document.getElementById(id) != null) {
+            document.getElementById(id).addEventListener("change", function() {
+                setConfig(configs, document.getElementById(id).value);
+            });
+            clearInterval(interval);
+        }
+    }, 0);
+}
+function generateNewConfig(label, id, configs) {
+    let content = `${label} <select id="${id}">`;
+    for(let i = 0; i < configs.length; i++) {
+        content += `<option value="${configs[i][0]}">${configs[i][1]}</option>`;
+    }
+    content += `</select>`;
+    for(let i = 0; i < configs.length; i++) {
+        content += generateNewToggle("", configs[i][3], configs[i][2], !i ? "display: inline-block;" : "display: none;");
+    }
+    addEventListen(id, configs);
+    return content;
+}
+//menu css
+$("body").append(`
+           <div id="modmenu" style="display: block;
+           padding: 10px;
+           border-radius: 15px;
+           background-color: rgba(0, 0, 0, 0.25);
+           background: linear-gradient(#090c1c,#38c0ea,#9639e9);
+           position: absolute;
+           left: 20px;
+           top: 20px;
+           width: 375px;">
+           </div>`);
+//scroll wheel
+$("#mainMenu").css({
+    "overflow-y": "scroll",
+});
+//inside menu
+$("#modmenu").append(`
+
+           <div id="textHelp" style="border-radius:20px;"> <legend
+           style = "font-size: 30px; text-align: center;"><br>CaMoD menu</legend>
+           <div style="color: rgb(255, 255, 255);font-size: 15px; padding-left: 25px; max-height: 235px;">
+           <br>
+
+
+           ${generateNewList("Music: ", "chatType", [
+    [0, "music"],
+     [1, "invincible"],
+            ])}
+
+<br>
+<div style="font-size:10px;">Music:invincible</div>
+<br>
+<br>
+                          </div>
+`);
+document.addEventListener("keydown", event => {
+    let key = event.key.toLowerCase();
+    if (key == "escape") {
+        $("#modmenu").toggle();
+    }
+});
+
+// Erstellen Sie eine Audio-Instanz
+const audio = new Audio();
+
+// Verfolgen Sie den aktuellen Status der Musik
+let isPlaying = false;
+
+// Funktion zum Abspielen der Musik
+function playMusic(url) {
+  audio.src = url;
+  audio.play();
+  isPlaying = true;
+  console.log("Musik wird abgespielt");
+}
+
+// Funktion zum Anhalten der Musik
+function pauseMusic() {
+  audio.pause();
+  audio.currentTime = 0;
+  isPlaying = false;
+  console.log("Musik angehalten");
+}
+// Funktion zum Überprüfen und Steuern der Musik basierend auf der Taste und der ausgewählten Option
+function handleKeyPress(event, selectedOption) {
+  const key = event.key;
+  if (key === "p" || key === "P") {
+    if (selectedOption === "Egzod - No Rival") {
+      const musicUrl = "https://rur.hitmotop.com/get/music/20190522/K-391_-_Earth_64401829.mp3";
+      if (isPlaying) {
+        pauseMusic();
+      } else {
+        playMusic(musicUrl);
+      }
+    }
+  }
+}
+
+// Beispielaufruf der Funktion für die Tastatureingabe und die Optionenauswahl
+let selectedOption = "Egzod - No Rival";
+
+// Funktion zum Aktualisieren der ausgewählten Option
+function updateSelectedOption(option) {
+  selectedOption = option;
+}
+
+// Beispielaufruf der Funktion für die Tastatureingabe
+document.addEventListener("keydown", (event) => handleKeyPress(event, selectedOption));
+
+
+
+
+
+
+
+
+            var singing = {
+                audio: null,
+                name: "",
+                toggle: false,
+                start: 0,
+                stop: 0,
+                index: 0,
+            };
+            var songs = [{
+                name: "zerkalo",
+                src: "https://rur.hitmotop.com/get/music/20190522/K-391_-_Earth_64401829.mp3",
+                sync: {
+                    "12:679": "Here and now",
+                    "13:730": "you're coming up to me",
+                    "15:197": "'Fore I'm lighting up the sky",
+                    "18:565": "Feel the ground",
+                    "19:855": "shaking underneath",
+                    "21:346": "Tryna take me alive",
+                    "24:415": "Oh-oh-oh-oh-oh-oh-oh",
+                    "26:906": "Get ready for the fallout",
+                    "30:357": "Oh-oh-oh-oh-oh-oh-oh",
+                    "33:26": "Can't stop me now",
+                    "35:154": "I got no rival",
+                    "37:463": "I'ma find my way",
+                    "39:615": "Through the blood and pain",
+                    "41:162": "Game of survival",
+                    "43:463": "Any time or place",
+                    "45:577": "Watch 'em run away",
+                    "47:337": "I got no-",
+                    "49:78": "I'll be standing on my own",
+                    "51:259": "Never gonna take my thrown",
+                    "53:389": "I got no rival",
+                    "55:349": "Watch 'em run away",
+                    "57:320": "I got no, no, no",
+                    "58:789": "I got no, no, no rival",
+                    "1:0:227": "No rival",
+                    "1:11:329": "No rival",
+                    "1:17:295": "No Rival",
+                    "1:24:694": "Tell them now what you gon' do",
+                    "1:27:265": "We can do this face-to-face",
+                    "1:30:316": "Reckoning is coming real soon",
+                    "1:33:254": "Doesn't matter what you say",
+                    "1:36:175": "Tryna tell you",
+                    "1:37:203": "listen to the moment",
+                    "1:38:512": "Can't take mine 'cause I own it",
+                    "1:42:714": "Don't you know that",
+                    "1:43:869": "I'm locked and I'm loaded?",
+                    "1:45:389": "You're out of focus",
+                    "1:48:202": "Oh-oh-oh-oh-oh-oh-oh",
+                    "1:51:61": "Get ready for the fallout",
+                    "1:54:362": "Oh-oh-oh-oh-oh-oh-oh",
+                    "1:56:885": "Can't stop me now",
+                    "1:59:205": "I got no rival",
+                    "2:1:383": "I'ma find my way",
+                    "2:3:722": "Through the blood and pain",
+                    "2:5:242": "Game of survival",
+                    "2:7:461": "Any time or place",
+                    "2:9:631": "Watch 'em run away",
+                    "2:11:210": "I got no-",
+                    "2:12:959": "I'll be standing on my own",
+                    "2:15:221": "Never gonna take my throne",
+                    "2:17:141": "I got no rival",
+                    "2:19:351": "Watch 'em run away",
+                    "2:21:221": "I got no, no, no",
+                    "2:22:770": "I got no, no, no rival",
+                    "2:24:149": "No rival",
+                    "2:29:116": "No rival",
+                    "2:33:194": "I got no, no, no",
+                    "2:34:695": "I got no, no, no rival",
+                    "2:41:239": "No rival",
+                    "2:59:204": "No rival",
+                },
+                        }];
+            let converToJSDelay = (time) => {
+                let newTime = time.split(":").reverse();
+                time = 0;
+                let convert = [6e4 * 60, 6e4, 1000, 1].reverse();
+                newTime.forEach((b, c) => {
+                    time += b * convert[c];
+                });
+                return time;
+            };
+            songs.forEach(e => {
+                let oldDatas = e.sync;
+                e.sync = {};
+                for (let time in oldDatas) {
+                    e.sync[converToJSDelay(time)] = oldDatas[time];
+                }
+            });
+            var autoGrindHotkey = {
+                toggle: false,
+                last: 0,
+            };
+
+(function() {
+    let errorText = "arguments bro..."
+
+    function setLS(key, value = void 0) {
+        if (!key) return console.log(errorText)
+
+        return localStorage.setItem(key, JSON.stringify(value))
+    }
+
+    function getLS(key) {
+        if (!key) return console.log(errorText)
+
+        try {
+            return JSON.parse(localStorage.getItem(key))
+        } catch {
+            return localStorage.getItem(key)
+        }
+    }
+
+    function isGUIDisabled() {
+        if (!["allianceinput", 'chatbox', 'nameinput'].includes(document.activeElement.id.toLowerCase())) {
+            return true
+        }
+
+        return false
+    }
+
+    let gameGrid = (typeof getLS("gameGrid") !== "undefined" ? getLS("gameGrid") : true)
+
+    function createElement(tag, action, node = document.body) {
+        if (!tag || !action) return console.log(errorText)
+
+        let element = document.createElement(tag)
+
+        action(element, element.style)
+
+        node.appendChild(element)
+    }
+
+    createElement("div", (element, style) => {
+        element.id = "toggler-holder"
+        style.display = "flex"
+        style.pointerEvents = "none"
+        style.width = "100%"
+        style.height = "100%"
+        style.justifyContent = "center"
+        style.alignItems = "center"
+        style.position = "absolute"
+        style.top = "0px"
+        style.zIndex = "999999999999999"
+    })
+
+    if (document.getElementById("toggler-holder")) {
+        document.getElementById("toggler-holder").style.display = "none"
+
+        let togglerCode = `
+        <div class="single-chart">
+          <svg viewBox="0 0 36 36">
+            <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <text x="18" y="17.35" class="percentage">Toggler Game Grid</text>
+            <text x="18" y="20.35" class="percentage" id="percToggle" style="fill: #adadad;">0%</text>
+          </svg>
+        </div>
+        <style>
+        .single-chart {
+          display: flex;
+          width: 50%;
+          justify-content: space-around;
+        }
+
+        .circle {
+          fill: rgb(28 28 28 / 70%);
+          stroke: #eee;
+          stroke-width: .5;
+          stroke-linecap: round;
+          animation: progress 1s ease-out forwards;
+        }
+
+        @keyframes progress {
+          0% {
+            stroke-dasharray: 0 100;
+          }
+        }
+
+        .percentage {
+          fill: #eee;
+          font-size: 2px;
+          text-anchor: middle;
+        }
+        </style>
+        `
+        document.getElementById("toggler-holder").innerHTML = togglerCode
+    }
+
+    let togglerOffset = 0
+
+    function resetToggler() {
+        keys[191] = false
+        activeToggler = false
+        togglerOffset = 0
+        document.getElementById("toggler-holder").style.display = "none"
+        document.querySelector(".circle").style.strokeDasharray = [0, 100]
+    }
+
+    function toggleGameGrid() {
+        document.getElementById("toggler-holder").style.display = "flex"
+
+        togglerOffset += 2
+        activeToggler = true
+
+        document.querySelector(".circle").style.strokeDasharray = [togglerOffset, 100]
+        document.getElementById("percToggle").innerHTML = togglerOffset + "%"
+
+        if (togglerOffset >= 100) {
+            gameGrid = !gameGrid
+            setLS("gameGrid", gameGrid)
+            resetToggler()
+        }
+    }
+
+    let keys = []
+    let activeToggler = false
+    let node = document || document.getElementById("gameCanvas") || window
+
+    node.addEventListener("keydown", (event) => {
+        if (!isGUIDisabled()) return null
+
+        keys[event.keyCode] = true
+    })
+
+    node.addEventListener("keyup", (event) => {
+        keys[event.keyCode] = false
+    })
+
+    let { maxScreenWidth, maxScreenHeight } = window.config
+    let { lineTo, moveTo, clearRect } = CanvasRenderingContext2D.prototype
+    let gridAlpha = 0.06
+
+    CanvasRenderingContext2D.prototype.clearRect = function(x, y, width, height) {
+        if (keys[191]) {
+            toggleGameGrid()
+        } else {
+            if (activeToggler) {
+                resetToggler()
+            }
+        }
+
+        return clearRect.apply(this, arguments)
+    }
+
+    CanvasRenderingContext2D.prototype.moveTo = function(x, y) {
+        if (!gameGrid) {
+            if (this.globalAlpha == gridAlpha) {
+                return void 0
+            } else {
+                return moveTo.call(this, x, y)
+            }
+        }
+
+        return moveTo.apply(this, arguments)
+    }
+
+    CanvasRenderingContext2D.prototype.lineTo = function(x, y) {
+        if (!gameGrid) {
+            if (y == maxScreenHeight || x == maxScreenWidth) {
+                if (this.globalAlpha == gridAlpha) {
+                    return void 0
+                } else {
+                    return lineTo.call(this, x, y)
+                }
+            } else {
+                return lineTo.call(this, x, y)
+            }
+        }
+
+        return lineTo.apply(this, arguments)
+    }
+})()
+       $("#mapDisplay").css({background: `url('https://miuki.info/wp-content/uploads/2010/04/serious-business.png')`});
+document.title = "[R-insta]_[T-reverse]_[C-1tick]_[Y-1frame]_[G-bowinsta]_[Space-spikeinsta]_[ё-hatloop]_[ctrl-autoGG]_[M-mills]_[= autobuy]_[P-music]_[F9-Grid]"
+    document.getElementById("gameName").outerHTML='<div id="gameName" style="padding: 40px;">\n   <span style="text-shadow: none">Ca</span><span style="text-shadow: none;color: black;background: url(&quot;https://htmlcolorcodes.com/assets/images/colors/orange-color-solid-background-1920x1080.png&quot;);border-radius: 60px;background-size: 300px 100px;">MoD</span>\n</div>';
+document.getElementById("woodDisplay").style.color = "#ffff57";
+document.getElementById("stoneDisplay").style.color = "#ffff57";
+document.getElementById("killCounter").style.color = "#ffff57";
+document.getElementById("foodDisplay").style.color = "#ffff57"
 document.getElementById("scoreDisplay").style.color = "#ffff57";
 (function() {
     var Mill1;
@@ -35,12 +487,10 @@ document.getElementById("scoreDisplay").style.color = "#ffff57";
     var Mill3;
     var MillMod = true;
 document.addEventListener('keydown', function(e) {
-        if (e.keyCode == 77 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        if (e.keyCode == 81 && document.activeElement.id.toLowerCase() !== 'chatbox') {
         AutoMill = (AutoMill + 1) % 2;
             if (AutoMill == 0) {
-                doNewSend(["ch", [""]]);
             }else {
-                doNewSend(["ch", ["Handmills"]]);
             }
                 e.preventDefault();
                 if (MillMod) {
@@ -61,74 +511,14 @@ document.addEventListener('keydown', function(e) {
 
     function h1() {
         clearTimeout(Mill1);
-        place(millType, myPlayer.dir + toRad(90.00000000000000000066));
-        place(millType, myPlayer.dir - toRad(90.00000000000000000052));
-        place(millType, myPlayer.dir + toRad(0));
+        place(spikeType, myPlayer.dir + toRad(180));
+        place(spikeType, myPlayer.dir - toRad(0));
         Mill1 = setTimeout(function() {
             h1();
-        }, 130);
-    }
-    function h2() {
-        clearTimeout(Mill2);
-        place(millType, myPlayer.dir + toRad(90.00000000000000000071));
-        place(millType, myPlayer.dir - toRad(90.00000000000000000042));
-        place(millType, myPlayer.dir + toRad(0));
-        Mill1 = setTimeout(function() {
-            h2();
-        }, 130);
-    }
-        function h3() {
-        clearTimeout(Mill2);
-        place(millType, myPlayer.dir + toRad(90.00000000000000000081));
-        place(millType, myPlayer.dir - toRad(90.00000000000000000072));
-        place(millType, myPlayer.dir + toRad(0));
-        Mill1 = setTimeout(function() {
-            h3();
-        }, 130);
+        }, 210);
     }
 })();
 
-(function() {
-    var Gay1;
-    var Gay2;
-    var Gay3;
-    var GayMod = true;
-document.addEventListener('keydown', function(e) {
-        if (e.keyCode == 81 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-        AutoMill = (AutoMill + 1) % 2;
-            if (AutoMill == 0) {
-                doNewSend(["ch", ["ABS : disable"]]);
-                document.title = "AutoGay:Off"
-            }else {
-                doNewSend(["ch", ["ABS : enabe"]]);
-                document.title = "AutoGay:On"
-            }
-                e.preventDefault();
-                if (GayMod) {
-                    Gay1 = setTimeout(function() {
-                        h1();
-                    }, 0);
-                } else {
-                    clearTimeout(Gay1);
-                    clearTimeout(Gay2);
-                    clearTimeout(Gay3);
-                                    }
-            GayMod = !GayMod;
-            }
-        }
-    );
-
-
-
-    function h1() {
-        clearTimeout(Mill1);
-        place(spikeType, myPlayer.dir + toRad(45));
-        place(spikeType, myPlayer.dir - toRad(45));
-        Gay1 = setTimeout(function() {
-            h1();
-        }, 200);
-    }
-})();
 
 window.onbeforeunload = null;
 
@@ -140,31 +530,98 @@ let height;
 
 
 var antiinsta = true
+var autobuy = false
+var autogrind = false
+var autoFrozenMill = false
+var AutoInsta = false
+
+let spin = false;
+let dirSpin = 0;
+let sync = false;
+setInterval(()=>{
+    if(spin == true){
+        doNewSend(["5", [primary, true]]);
+        doNewSend(["13c", [0, 7, 0]]);
+        doNewSend(["13c", [0, 18, 1]]);
+        setTimeout(() => {
+            doNewSend(["13c", [0, 11, 0]]);
+            doNewSend(["13c", [0, 21, 1]]);
+        }, 150);
+        setTimeout(() => {
+            doNewSend(["13c", [0, 53, 0]]);
+            doNewSend(["13c", [0, 16, 1]]);
+        }, 250);
+    }
+}, 450);
+
+
+setInterval( () =>{
+if(autogrind == true){
+setTimeout(() => {
+doNewSend(["13c", [0, 40, 0]]);
+            doNewSend(["13c", [0, 11, 1]]);
+            doNewSend(["c", [1]]);
+                                }, 10);
+              doNewSend(["c", [1]]);
+            place(turretType,myPlayer.dir + toRad(45));
+            place(turretType,myPlayer.dir - toRad(45));
+            place(turretType,myPlayer.dir - toRad(0));
+                        }
+                    }, 250);
+
+setInterval(() => {
+    if(autoFrozenMill==true) {
+        place(millType, myPlayer.dir + toRad(78));
+        place(millType, myPlayer.dir - toRad(78));
+        place(millType, myPlayer.dir - toRad(0));
+    }
+}, 450);
 
 setInterval( () => {
-        if(autobreak) {
-                    if(nearestEnemy) {
-                                    nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
-                                   if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 120) {
-                               doNewSend(["ch", ["Right next to me gay"]]);
+     if(autobuy == true) {
+    doNewSend(["13c", [1, 22, 0]]);
+     doNewSend(["13c", [1, 6, 0]]);
+      doNewSend(["13c", [1, 7, 0]]);
+       doNewSend(["13c", [1, 12, 0]]);
+        doNewSend(["13c", [1, 53, 0]]);
+         doNewSend(["13c", [1, 40, 0]]);
+          doNewSend(["13c", [0, 11, 1]]);
+           doNewSend(["13c", [0, 18, 1]]);
+            doNewSend(["13c", [0, 15, 1]]);
+             doNewSend(["13c", [0, 31, 1]]);
+              doNewSend(["13c", [0, 56, 1]]);
+                                             }
+}, 350);
+
+var ABO = false
+setInterval( () => {
+    if(ABO) {
+        if(nearestEnemy) {
+            nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
+            if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 500) {
+        place(boostType, myPlayer.dir - toRad(0));
+        setTimeout(() => {
+        place(boostType, myPlayer.dir - toRad(0));
+           }, 130);
+        } else if (Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 200) {
+        place(spikeType, myPlayer.dir + toRad(90));
+        place(spikeType, myPlayer.dir - toRad(90));
+        place(spikeType, myPlayer.dir + toRad(90));
+        place(spikeType, myPlayer.dir - toRad(90));
             }
         }
     }
-}, 10);
-
-
-
-
+}, 1000);
 setInterval( () => {
     if(AutoInsta) {
         if(nearestEnemy) {
             nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
-            if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 120) {
+            if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 90) {
+           aim(Math.cos(dirSpin)*document.body.clientWidth, Math.sin(dirSpin)*document.body.clientHeight);
         autoaim = true;
-    doNewSend(["ch", ["AutoGG"]]);
         doNewSend(["5", [primary, true]]);
-        doNewSend(["13c", [1, 7, 0]]);
-        doNewSend(["13c", [0, 7, 0]]);
+        doNewSend(["13c", [1, 12, 0]]);
+        doNewSend(["13c", [0, 12, 0]]);
         doNewSend(["13c", [0, 0, 1]]);
         doNewSend(["13c", [0, 18, 1]]);
         place(spikeType, myPlayer.dir + toRad(90));
@@ -172,10 +629,11 @@ setInterval( () => {
         place(spikeType, myPlayer.dir - toRad(0));
         place(spikeType, myPlayer.dir - toRad(180));
             autoaim = false;
+            AutoInsta = false;
             }
         }
     }
-}, 1000);
+}, 1);
 
 setInterval(() => {
     if(autoaim == true) {
@@ -218,45 +676,33 @@ window.sessionStorage.force = coreURL.searchParams.get("fc");
 const CanvasAPI = document.getElementById("gameCanvas")
 CanvasAPI.addEventListener("mousedown", buttonPressD, false);
     function buttonPressD(e) {
-    if (e.button == 2) {
-        doNewSend(["ch", [""]]);
+    if (e.button == 2 ) {
         hat(40);
         acc(21);
-        doNewSend(["7", [1]])
         setTimeout( () => {
                hat(6);
-            acc(11);
-            doNewSend(["7", [1]])
              }, 100);
     }
         if (e.button == 1) {
-                                doNewSend(["5", [secondary, true]]);
-                                setTimeout( () => {
-               hat(53);
-            acc(21);
-                }, 100);
-                    setTimeout( () => {
-               hat(6);
-            acc(11);
-                 }, 440);
-    }
-
-                if (e.button == 0) {
-         doNewSend(["5", [primary, true]]);
-       hat(7);
+        doNewSend(["5", [primary, true]]);
+        hat(7);
+        acc(21)
+          setTimeout( () => {
+         doNewSend(["6", [5]]);//polearm
+             }, 70);
+          setTimeout( () => {
+        hat(6);
+        }, 1110);
+        }
+        if (e.button == 0) {
+        doNewSend(["5", [primary, true]]);
+        hat(7);
         acc(18)
         setTimeout( () => {
-            doNewSend(["7", [1]]);
-          hat(12);
-            acc(11)
-        }, 200);
-                        setTimeout( () => {
-            doNewSend(["7", [1]])
-                 }, 200);
-     }
+        hat(12)
+        }, 110);
+        }
  }
-
-
 let vengeance = 0;
 let trap_a = null;
 let intrap = false;
@@ -271,7 +717,6 @@ var nearestEnemyAngle;
 var autobreak = false;
 var isEnemyNear;
 var instaSpeed=200;
-var AutoInsta = false;
 var primary;
 var secondary;
 var foodType;
@@ -319,7 +764,7 @@ let EnemyPlayer = {
     isSkull: null
 };
 
-let healSpeed = 90;
+let healSpeed = 100;
 
 var messageToggle = 0;
 var clanToggle = 0;
@@ -328,7 +773,7 @@ let ai = 0;
 let healToggle = 1;
 let hatToggle = 1;
 var PREFIX = "!";
-
+var PRFX = ".";
 
 document.msgpack = msgpack;
 function n(){
@@ -347,7 +792,6 @@ WebSocket.prototype.send = function(m){
     }
     this.oldSend(m);
 };
-
 function socketFound(socket){
     socket.addEventListener('message', function(message){
         handleMessage(message);
@@ -367,12 +811,78 @@ function handleMessage(m){
     let item = data[0];
     if(!data) {return};
 
-        if (data[0] == "ch" && data[1] == myPlayer.id && data[2].split(' ') == PREFIX+"Crash") {
-           doNewSend(["6", [12]]);
-           doNewSend(["6", [15]]);
+        if (data[0] == "ch" && data[1] == myPlayer.id && data[2].split(' ') == PREFIX+"bow") {
+        autoaim = true;
+                    doNewSend(["13c", [0, 53, 0]]);
+                doNewSend(["5", [secondary, true]]);
+                doNewSend(["7", [2]]);
+    setTimeout(() => {
+        doNewSend(["6", [12]]);
+    },80);
+    setTimeout(() => {
+        doNewSend(["6", [13]]);
+    }, 160); // 160
+    setTimeout(() => {
+        doNewSend(["5", [primary, true]]);
+        doNewSend(["7", [1]]);
+       doNewSend(["13c", [0, 6, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 21, 1]]);
+            setTimeout(() => {
+                autoaim = false;
+                    }, 10); // 160
+    }, 280);
+    }
+      if (myPlayer.kills < 1) {
+                doNewSend(["ch", ["first kill"]]);
+    }
+    if (data[0] == "ch" && data[1] == myPlayer.id && data[2].split(' ')[0] == PREFIX+"left") {
         setTimeout(() => {
+            doNewSend(["9", [null]])
         },500);
     }
+        if (data[0] == "ch" && data[1] == myPlayer.id && data[2].split(' ') == PREFIX+"1frame") {
+                                   setTimeout( () => {
+                doNewSend(["6", [5]]);//polearm
+                                }, 110);
+                        setTimeout( () => {
+                doNewSend(["6", [17]]);//cookie
+                              }, 110);
+                             setTimeout( () => {
+                doNewSend(["6", [31]]);//trap
+                         }, 110);
+            setTimeout( () => {
+                doNewSend(["6", [27]]);//better mill
+                 }, 110);
+             setTimeout( () => {
+                doNewSend(["6", [10]]);//great hammer
+                 }, 110);
+            setTimeout( () => {
+                doNewSend(["6", [38]]);//tp
+                 }, 110);
+        }
+
+        if (data[0] == "ch" && data[1] == myPlayer.id && data[2].split(' ') == PREFIX+"SM") {
+                                    setTimeout( () => {
+                doNewSend(["6", [3]]);//polearm
+                                }, 110);
+                        setTimeout( () => {
+                doNewSend(["6", [17]]);//cookie
+                                        }, 110);
+                                    setTimeout( () => {
+                doNewSend(["6", [31]]);//trap
+                                    }, 110);
+                          setTimeout( () => {
+                doNewSend(["6", [27]]);//better mill
+                          }, 110);
+                                                setTimeout( () => {
+                doNewSend(["6", [9]]);//great hammer
+                                   }, 110);
+              setTimeout( () => {
+                doNewSend(["6", [38]]);//tp
+                  doNewSend(["ch", ["AutoUpgrade: On"]]);
+                     }, 110);
+                                    }
 
     if(item === "io-init") {
             let cvs = document.getElementById("gameCanvas");
@@ -390,6 +900,15 @@ function handleMessage(m){
     function chat(e) {
     doNewSend(["ch", [e]])
 }
+var antiinsta = true
+    if (item == 'h' && data[1] == myPlayer.id) {
+        if (data[2] <= 21 && data[2] > 0 && antiinsta == true) {
+            place(foodType);//eat Bobik
+        }
+        if (data[2] <= 50 && data[2] > 0 && antiinsta == true) { //60
+            place(foodType);//eat Bobik
+        }
+    }
     if (item == "1" && myPlayer.id == null){
         myPlayer.id = data[1];
     }
@@ -421,7 +940,6 @@ function handleMessage(m){
         nearestEnemy = enemiesNear.sort((a,b) => dist(a, myPlayer) - dist(b, myPlayer))[0];
     }
 
-
     if(nearestEnemy) {
         nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
         if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 300) {
@@ -446,42 +964,11 @@ function handleMessage(m){
     }
     if (!nearestEnemy) {
         nearestEnemyAngle = myPlayer.dir;
-
-    if (item == 'h' && data[1] == myPlayer.id) {
-        if (data[2] <= 21 && data[2] > 0 && antiinsta == true) {
-            chat("AntiRevInst")
-            hat(6)
-            place(foodType);//eat Bobik
-            place(foodType);//eat Bobik
-        }
-        if (data[2] <= 55 && data[2] > 0 && antiinsta == true) {
-                        chat("Antihit")
-                        hat(6);
-            place(foodType);//eat Bobik
-        }
-        if (data[2] <= 60 && data[2] > 0 && antiinsta == true) {
-                        chat("AntiInsta")
-            hat(6);
-            acc(18)
-            place(foodType);//eat Bobik
-            setTimeout( () => {
-                hat(11)
-                acc(21)
-            }, 80);
-            setTimeout( () => {
-                hat(6);
-            }, 760);
-            setTimeout( () => {
-                hat(6);
-            }, 1900);
-        }
-    }
-
     }
     if(item == "h" && data[1] == myPlayer.id) {
-        if(data[2] < 100 && data[2] > 0 && healToggle == 1) { // place  place(foodType);
+        if(data[2] < 85 && data[2] > 0 && healToggle == 1) { // place  place(foodType);
             setTimeout( () => {
-               place(foodType, null);
+               place(foodType);
              }, healSpeed);
         }
     }
@@ -580,14 +1067,14 @@ var repeater = function(key, action, interval) {
 }
 
 const healer1 = repeater(51, () => {placeQ(foodType, boostDir);
-                                    placeQ(foodType, boostDir)}, 60);
+                                    placeQ(foodType, boostDir)}, 90);
 const healer2 = repeater(81, () => {placeQ(foodType, boostDir);
-                                    placeQ(foodType, boostDir)}, 60);
-const boostPlacer = repeater(70, () => {place(boostType)}, 60);
-const spikePlacer = repeater(86, () => {place(spikeType)}, 60);
-const millPlacer = repeater(78, () => {place(millType)}, 60);
-const turretPlacer = repeater(72, () => {place(turretType)}, 57);
-const fourSpawnpads = repeater(75, fourSpawnpad, 60);
+                                    placeQ(foodType, boostDir)}, 90);
+const boostPlacer = repeater(70, () => {place(boostType)}, 50);
+const spikePlacer = repeater(86, () => {place(spikeType)}, 50);
+const millPlacer = repeater(78, () => {place(millType)}, 50);
+const turretPlacer = repeater(72, () => {place(turretType)}, 50);
+const fourSpawnpads = repeater(75, fourSpawnpad, 50);
 
 document.addEventListener('keydown', (e)=>{
     spikePlacer.start(e.keyCode);
@@ -598,18 +1085,36 @@ document.addEventListener('keydown', (e)=>{
     millPlacer.start(e.keyCode);
     turretPlacer.start(e.keyCode);
 
-    if (e.keyCode == 192 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-        place(spikeType, myPlayer.dir + toRad(145));
-        place(spikeType, myPlayer.dir - toRad(145));
-        place(spikeType, myPlayer.dir + toRad(75));
-        place(spikeType, myPlayer.dir - toRad(75));
-        place(spikeType, myPlayer.dir - toRad(0));
-    }
-
     if (e.keyCode == 71 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-        place(spikeType, myPlayer.dir + toRad(90));
-        place(spikeType, myPlayer.dir - toRad(90));
-        place(boostType, myPlayer.dir - toRad(0));
+                autoaim = true;
+                doNewSend(["5", [secondary, true]]);
+                doNewSend(["7", [2]]);
+                setTimeout(() => {
+                doNewSend(["6", [12]]);
+                doNewSend(["13c", [0, 53, 0]]);
+                },100);
+                    var sck = "";
+                setTimeout(() => {
+                doNewSend(["6", [15]]);
+                   for(let i = 0; i < 865; i++){
+                    let caas = new Uint8Array(140);
+                    for(let i = 0; i <caas.length;i++){
+                        caas[i] = Math.floor(Math.random()*5);
+                        sck += caas[i]
+                    }
+                }
+                ws.send(caas);
+                }, 210); // 160
+                setTimeout(() => {
+                doNewSend(["5", [primary, true]]);
+                doNewSend(["7", [1]]);
+                doNewSend(["13c", [0, 6, 0]]);
+                doNewSend(["13c", [0, 0, 1]]);
+                doNewSend(["13c", [0, 21, 1]]);
+                setTimeout(() => {
+                autoaim = false;
+                    }, 10); // 160
+    }, 350);
     }
     if (e.keyCode == 16 && document.activeElement.id.toLowerCase() !== 'chatbox') {
         if (myPlayer.y < 2400){
@@ -650,33 +1155,41 @@ document.addEventListener('keydown', (e)=>{
         AutoInsta = !AutoInsta
         doNewSend(["ch", ["AutoGG:" + AutoInsta]]);
     }
-            if(e.keyCode == 119 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-        autobreak = !autobreak
-        doNewSend(["ch", ["text :" + autobreak]]);
+    if(e.keyCode == 187 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+    autobuy = !autobuy
+  doNewSend(["ch", ["autobuy:" + autobuy]]);
+    }
+    if(e.keyCode == 120 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+      autogrind = !autogrind
+    doNewSend(["ch", [autogrind]]);
     }
 
+    if(e.keyCode == 77 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+    autoFrozenMill = !autoFrozenMill
+    doNewSend(["ch", [autoFrozenMill]]);
+    }
+    if(e.keyCode == 192 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+     spin = !spin
+     doNewSend(["ch", [spin]]);
+    }
+
+     if(e.keyCode == 119 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+    ABO = !ABO
+  doNewSend(["ch", ["ABS :" + ABO]]);
+    }
     // Lag insta
     if(e.keyCode == 84 && document.activeElement.id.toLowerCase() !== 'chatbox') {
         autoaim = true;
-        doNewSend(["5", [secondary, true]]);
         doNewSend(["13c", [0, 53, 0]]);
         doNewSend(["13c", [0, 0, 1]]);
-        doNewSend(["13c", [0, 21 , 1]]);
+        doNewSend(["13c", [0, 21, 1]]);
+        doNewSend(["5", [secondary, true]]);
         doNewSend(["c", [1]]);
-        setTimeout( () => {
-         var sck = "";
+                setTimeout( () => {
             doNewSend(["5", [primary, true]]);
             doNewSend(["13c", [0, 7, 0]]);
             doNewSend(["13c", [0, 0, 1]]);
             doNewSend(["13c", [0, 18, 1]]);
-                             for(let i = 0; i < 865; i++){
-                    let caas = new Uint8Array(400);
-                    for(let i = 0; i <caas.length;i++){
-                        caas[i] = Math.floor(Math.random()*5);
-                        sck += caas[i]
-                    }
-                }
-                ws.send(caas);
         }, 80);
         setTimeout( () => {
             doNewSend(["5", [primary, true]]);
@@ -686,44 +1199,13 @@ document.addEventListener('keydown', (e)=>{
             doNewSend(["13c", [0, 0, 1]]);
             doNewSend(["13c", [0, 11, 1]]);
             autoaim = false;
-        }, 180);
+        }, 222);
     }
-
-    // BOW INSTA
-    if (e.keyCode == 189 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-    autoaim = false;
-        doNewSend(["ch", ["Monkeybowinsta"]]);
-        doNewSend(["13c", [0, 53, 0]]);
-        doNewSend(["13c", [0, 0, 1]]);
-        doNewSend(["13c", [0, 21, 1]]);
-        doNewSend(["5", [secondary, true]]);
-            setTimeout(() => {
-                doNewSend(["7", [2]]);
-                    },120);
-    setTimeout(() => {
-        doNewSend(["6", [12]]);
-    },250);
-    setTimeout(() => {
-        doNewSend(["6", [15]]);
-        doNewSend(["13c", [0, 38, 0]]);
-        doNewSend(["13c", [0, 0, 1]]);
-        doNewSend(["13c", [0, 18, 1]]);
-    }, 250);
-    setTimeout(() => {
-        doNewSend(["5", [primary, true]]);
-        doNewSend(["7", [1]]);
-       doNewSend(["13c", [0, 6, 0]]);
-        doNewSend(["13c", [0, 0, 1]]);
-        doNewSend(["13c", [0, 21, 1]]);
-    }, 500);
-}
-
  //rev3insta
     if(e.keyCode == 67 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-        autoaim = true;
+    autoaim = true;
         doNewSend(["13c", [0, 0, 0]]);
         doNewSend(["13c", [0, 0, 18]]);
-        doNewSend(["ch", ["Monkey1tick"]]);
         place(boostType, nearestEnemyAngle);
         doNewSend(["13c", [1, 53, 0]]);
         doNewSend(["5", [secondary, true]]);
@@ -733,14 +1215,7 @@ document.addEventListener('keydown', (e)=>{
             doNewSend(["5", [primary, true]]);
             doNewSend(["13c", [1, 7, 0]]);
             doNewSend(["13c", [0, 7, 0]]);
-        }, 110);
-                setTimeout(() => {
-               doNewSend(["5", [secondary, true]]);
-            doNewSend(["13c", [0, 38, 0]]);
-            doNewSend(["13c", [1, 38, 0]]);
-            doNewSend(["13c", [0, 18, 1]]);
-            doNewSend(["13c", [1, 18, 1]]);
-                            }, 230);
+        }, 90);
         setTimeout(() => {
             doNewSend(["13c", [0, 0, 0]]);
             doNewSend(["7", [1]]);
@@ -750,65 +1225,86 @@ document.addEventListener('keydown', (e)=>{
             doNewSend(["13c", [0, 11, 1]]);
             doNewSend(["13c", [1, 11, 1]]);
             autoaim = false;
-        }, 400);
+        }, 225);
     }
     //1 FraRme
-    if(e.keyCode == 89 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-             autoaim = true;
-                doNewSend(["ch", ["Monkey1frame"]]);
+        if (e.keyCode == 89 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                 autoaim = true;
         doNewSend(["13c", [0, 0, 0]]);
         doNewSend(["13c", [0, 0, 18]]);
         doNewSend(["13c", [1, 53, 0]]);
         doNewSend(["13c", [0, 53, 0]]);
+        doNewSend(["5", [primary, true]]);
         setTimeout(() => {
+        doNewSend(["7", [2]]);
             doNewSend(["13c", [1, 7, 0]]);
             doNewSend(["13c", [0, 7, 0]]);
-            doNewSend(["5", [primary, true]]);
-        doNewSend(["7", [2]]);
+            doNewSend(["13c", [0, 21, 1]]);
+            doNewSend(["13c", [1, 21, 1]]);
         }, 80);
-        setTimeout(() => {
-        doNewSend(["13c", [0, 38, 0]]);
-        doNewSend(["13c", [0, 0, 1]]);
-        doNewSend(["13c", [0, 18, 1]]);
-                    }, 180);
                 setTimeout(() => {
             doNewSend(["7", [1]]);
             doNewSend(["5", [primary, true]]);
-            doNewSend(["13c", [0, 12, 0]]);
-            doNewSend(["13c", [1, 12, 0]]);
+            doNewSend(["13c", [0, 6, 0]]);
+            doNewSend(["13c", [1, 6, 0]]);
             doNewSend(["13c", [0, 11, 1]]);
             doNewSend(["13c", [1, 11, 1]]);
             autoaim = false;
-        }, 360);
-         }
-
-// instakill
-    if(e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
-        autoaim = true;
-        doNewSend(["ch", ["MonkeyInsta"]]);
+        }, 222);
+        }
+    //spike insta
+        if(e.keyCode == 32 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        place(spikeType, nearestEnemyAngle);
         doNewSend(["5", [primary, true]]);
+        doNewSend(["13c", [1, 7, 0]]);
         doNewSend(["13c", [0, 7, 0]]);
         doNewSend(["13c", [0, 0, 1]]);
-        doNewSend(["13c", [0, 21, 1]]);
+        doNewSend(["13c", [0, 0, 1]]); // 21
         doNewSend(["c", [1]]);
-        setTimeout( () => {
-            doNewSend(["13c", [0, 53, 0]]);
-            doNewSend(["5", [secondary, true]]);
-        }, 80);
-        setTimeout( () => {
-        doNewSend(["13c", [0, 38, 0]]);
-        doNewSend(["13c", [0, 0, 1]]);
-        doNewSend(["13c", [0, 18, 1]]);
-         }, 200);
+       // place(spikeType, nearestEnemyAngle);
         setTimeout( () => {
             doNewSend(["c", [0, null]]);
-            doNewSend(["13c", [0, 12, 0]]);
+            doNewSend(["5", [secondary, true]]);
+            doNewSend(["13c", [1, 53, 0]]);
+            doNewSend(["13c", [0, 21, 0]]);
+        }, 80);
+        setTimeout( () => {
+          doNewSend(["5", [primary, true]]);
+            doNewSend(["13c", [1, 6, 0]]);
+            doNewSend(["13c", [0, 6, 0]]);
+        }, 222);
+        }
+// instakill
+    if(e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                 autoaim = true;
+        doNewSend(["13c", [0, 0, 0]]);
+        doNewSend(["13c", [0, 0, 18]]);
+        doNewSend(["13c", [1, 53, 0]]);
+        doNewSend(["13c", [0, 53, 0]]);
+        doNewSend(["5", [primary, true]]);
+        setTimeout(() => {
+        doNewSend(["7", [2]]);
+            doNewSend(["13c", [1, 7, 0]]);
+            doNewSend(["13c", [0, 7, 0]]);
+            doNewSend(["13c", [0, 21, 1]]);
+            doNewSend(["13c", [1, 21, 1]]);
+        }, 80);
+                setTimeout(() => {
+        doNewSend(["5", [secondary, true]]);
+            doNewSend(["13c", [1, 7, 0]]);
+            doNewSend(["13c", [0, 7, 0]]);
+            doNewSend(["13c", [0, 21, 1]]);
+            doNewSend(["13c", [1, 21, 1]]);
+        }, 160);
+          setTimeout(() => {
+              autoaim = false
+        doNewSend(["5", [primary, true]]);
+            doNewSend(["13c", [1, 6, 0]]);
+            doNewSend(["13c", [0, 6, 0]]);
             doNewSend(["13c", [0, 11, 1]]);
-            autoaim = false;
-           doNewSend(["5", [primary, true]]);
+            doNewSend(["13c", [1, 11, 1]]);
         }, 400);
     }
-
     if(e.keyCode == 97 && document.activeElement.id.toLowerCase() !== 'chatbox') {
         doNewSend(["6", [4]]);
     }
@@ -915,8 +1411,6 @@ function animate(space, chance) {
     return result;
 }
 
-document.title = "Gay.io"
-
 function update() {
     for (let i=0;i<9;i++){
         if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
@@ -985,8 +1479,9 @@ function update() {
     }
 }
 //reload bars
-window.primaryReloadColor = "#00538a";
-window.secondaryReloadColor = "#00538a";
+window.primaryReloadColor = "#ffff57";
+window.secondaryReloadColor = "#ffff57";
+
 
 try {
 
@@ -1438,88 +1933,3 @@ try {
 } catch (e) {
     throw new Error(e);
 }
-
-
-// game grid
-
-// ==UserScript==
-// @name Moomoo.io Game grid removal
-// @author Murka
-// @description Removes the game grid
-// @icon https://moomoo.io/img/favicon.png?v=1
-// @version 0.3
-// @match *://moomoo.io/*
-// @match *://*.moomoo.io/*
-// @run-at document-start
-// @grant none
-// @license MIT
-// @namespace https://greasyfork.org/users/919633
-// ==/UserScript==
-/* jshint esversion:6 */
-
-/*
-    Author: Murka
-    Github: https://github.com/Murka007
-    Discord: https://discord.gg/sG9cyfGPj5
-    Greasyfork: https://greasyfork.org/en/users/919633
-    MooMooForge: https://github.com/MooMooForge
-*/
-
-(function() {
-    "use strict";
-
-    // Change to true or false
-    const GRID_ENABLED = false;
-    function inRange(value, min, max) {
-        return value > min && value < max;
-    }
-
-    function createHook(target, prop, callback) {
-        const symbol = Symbol(prop);
-        Object.defineProperty(target, prop, {
-            get() { return this[symbol]; },
-            set(value) { callback(this, symbol, value); },
-            configurable: true
-        })
-    }
-
-    createHook(window, "config", function(that, symbol, value) {
-        if (typeof value === "object" && value.hasOwnProperty("maxScreenHeight")) {
-            delete window.config;
-            Object.defineProperty(window, "config", {
-                value: value,
-                configurable: false,
-                writeable: false
-            })
-        }
-    })
-
-    CanvasRenderingContext2D.prototype.moveTo = new Proxy(CanvasRenderingContext2D.prototype.moveTo, {
-        apply(target, _this, args) {
-
-            if (!GRID_ENABLED) {
-                const [ x, y ] = args;
-                const { maxScreenWidth, maxScreenHeight } = window.config || {};;
-                if (inRange(x, 0, maxScreenWidth) || inRange(y, 0, maxScreenHeight)) return null;
-            }
-
-            return target.apply(_this, args);
-        }
-    })
-
-})();
-
-// rainbow healts
-let hue = 0;
-
-let replaceInterval = setInterval(() => {
-if (CanvasRenderingContext2D.prototype.roundRect) {
-  CanvasRenderingContext2D.prototype.roundRect = ((oldFunc) => function() { if (this.fillStyle == "#030502") this.fillStyle = `hsl(${hue}, 100%, 50%)`; return oldFunc.call(this, ...arguments); })(CanvasRenderingContext2D.prototype.roundRect);
-  clearInterval(replaceInterval);
-}}, 10);
-
-function changeHue() {
-  hue += Math.random() * 3;
-}
-
-setInterval(changeHue, 10);
