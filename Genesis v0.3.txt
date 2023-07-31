@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Genesis
 // @author       Nyxly
-// @version      0.1
-// @description  undefined
+// @version      0.3
+// @description  v3 By:Jupe
 // @match        *://*.moomoo.io/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=glitch.me
 // @require      https://rawgit.com/kawanet/msgpack-lite/master/dist/msgpack.min.js
