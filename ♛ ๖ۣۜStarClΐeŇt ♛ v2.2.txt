@@ -1,8 +1,8 @@
 // // ==UserScript==
 // @name        ♛ ๖ۣۜStarClΐeŇt ♛
 // @author       random skiddy newgens and zlx/kite
-// @description  skidded antimoooaddict
-// @version      v1.7
+// @description  real v2.2 star client
+// @version      v2.2
 // @match        *://*.moomoo.io/*
 // @require      https://rawgit.com/kawanet/msgpack-lite/master/dist/msgpack.min.js
 // @run-at       document-end
