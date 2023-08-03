@@ -1,15 +1,24 @@
 // ==UserScript==
-// @name         Pre-Client Remake Minify
-// @author       ueheua
-// @description  Beta, Have issue.
-// @version      v0.7
+// @name         Pre Client Remake Minify
+// @author       eahuha
+// @description
+// @version      V1
 // @require      https://rawgit.com/kawanet/msgpack-lite/master/dist/msgpack.min.js
-// @icon         https://c.tenor.com/1y8zDc-ll-EAAAAd/3d-saul-saul-goodman.gif
+// @icon         https://tenor.com/view/sad-sad-face-sad-crying-9gag-gif-14453131
 // @match        *://*.moomoo.io/*
+// @match        https://moomoo.skids.info/?server=8:15:0
 // @grant        none
 // ==/UserScript==
 
-// Control: check code
+// Controls:
+// Q = HealA
+// M = WindmillsA
+// K = Bull Helmet
+// L = Soldier/Booster/Fish
+// V = Spikes
+// T = One Tick patched
+// G = Dont know
+// R = insta/autoinsta
 
 var አህሳ = "ክር",
     ትከፍታለህ = [0];
@@ -53,13 +62,13 @@ function objectDist(e, t) {
     return Math.hypot(e.y - t.y, e.x - t.x)
 }
 window.urName = "ohio";
-const ohio = new Audio("https://cdn.discordapp.com/attachments/1053956635032289280/1053956723704074270/ohio.mp3"),
-    goofy = new Audio("https://cdn.discordapp.com/attachments/1053956635032289280/1053978907717685288/ahh.mp3"),
-    ohiosong = new Audio("https://cdn.discordapp.com/attachments/1053956635032289280/1053986654416818216/ohiosong.mp3"),
-    madeinohio = new Audio("https://cdn.discordapp.com/attachments/1053956635032289280/1053987827353927740/madeinohio.mp3"),
-    song1 = new Audio("https://cdn.discordapp.com/attachments/1053956635032289280/1055142773948428348/Zack_Merci_X_CRVN_-_Nobody_NCS_Release.mp3"),
-    song2 = new Audio("https://cdn.discordapp.com/attachments/1053956635032289280/1055516288249757797/ae86.mp3"),
-    song3 = new Audio("https://cdn.discordapp.com/attachments/1053956635032289280/1069192210932826182/dontstandsoclose.mp3");
+const ohio = new Audio(""),
+    goofy = new Audio(""),
+    ohiosong = new Audio(""),
+    madeinohio = new Audio(""),
+    song1 = new Audio(""),
+    song2 = new Audio(""),
+    song3 = new Audio("");
 ! function (e) {
     var t = {};
 
@@ -4263,28 +4272,28 @@ const ohio = new Audio("https://cdn.discordapp.com/attachments/10539566350322892
                 un = !un;
                 let t = [{
                         say: "Children used to run and play",
-                        time: 15725
+                        time: 100
                     }, {
                         say: "Look at all this mess we made",
-                        time: 18600
+                        time: 105
                     }, {
                         say: "Guess i never know",
-                        time: 21500
+                        time: 110
                     }, {
                         say: "It went wrong",
-                        time: 23e3
+                        time: 115
                     }, {
                         say: "Sometimes i feel like all",
-                        time: 27500
+                        time: 120
                     }, {
                         say: "That's said",
-                        time: 28500
+                        time: 125
                     }, {
                         say: "Goes viral then people forget",
-                        time: 30500
+                        time: 130
                     }, {
                         say: "In this crazy world",
-                        time: 33500
+                        time: 135
                     }, {
                         say: "I don't belong",
                         time: 34800
@@ -4856,7 +4865,7 @@ const ohio = new Audio("https://cdn.discordapp.com/attachments/10539566350322892
             function yn(e, t) {
                 var n = Ks(e);
                 n && (n.chatMessage = function (e) {
-                    if ("what mod" == e && s.send("ch", "sam mod v69"), !mn)
+                    if ("" == e && s.send("ch", ""), !mn)
                         for (var t, n = 0; n < gn.length; ++n)
                             if (e.indexOf(gn[n]) > -1) {
                                 t = "";
@@ -5546,7 +5555,7 @@ const ohio = new Audio("https://cdn.discordapp.com/attachments/10539566350322892
                     Yi.bullet--
                 }), 3e3 / 9), ms.length && Yi.bullet >= 4 && !zi && (zi = !0, setTimeout((() => {
                     zi = !1
-                }), 3e3), V.length >= 3 ? Os(ms, R) <= 300 ? s.send("ch", "sync threat") : s.send("ch", "ranged sync homo") : s.send("ch", "ranged insta homo")))
+                }), 3e3), V.length >= 3 ? Os(ms, R) <= 300 ? s.send("ch", "gay") : s.send("ch", "2") : s.send("ch", "3")))
             }
 
             function Wi(e, t) {
@@ -6060,7 +6069,7 @@ const ohio = new Audio("https://cdn.discordapp.com/attachments/10539566350322892
                     drop: ["food", 200]
                 }, {
                     id: 5,
-                    name: "Quack",
+                    name: "Duck",
                     src: "chicken_1",
                     dmg: 8,
                     killScore: 2e3,
@@ -6073,7 +6082,7 @@ const ohio = new Audio("https://cdn.discordapp.com/attachments/10539566350322892
                     drop: ["food", 100]
                 }, {
                     id: 6,
-                    name: "MOOSTAFA",
+                    name: "Owner",
                     nameScale: 50,
                     src: "enemy",
                     hostile: !0,
@@ -6114,7 +6123,7 @@ const ohio = new Audio("https://cdn.discordapp.com/attachments/10539566350322892
                     spriteMlt: 1
                 }, {
                     id: 8,
-                    name: "MOOFIE",
+                    name: "Dog",
                     src: "wolf_2",
                     hostile: !0,
                     fixedSpawn: !0,
