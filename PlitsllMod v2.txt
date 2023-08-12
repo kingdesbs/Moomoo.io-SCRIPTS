@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name        PlitsllMod
-// @version     v.1
+// @version     v2
 // @description
 // @author      Plitsll
 // @match       *://moomoo.io/*
 // @match       *://sandbox.moomoo.io/*
 // @match       *https://moomoo.skids.info/*
-// @icon        https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJkuzt5py3HaagP2OCdXo_nsu2DGCPVoycqw&usqp=CAU
+// @icon        https://cdn.pixabay.com/photo/2019/12/27/10/57/beta-4722176_960_720.jpg
 // @require     https://greasyfork.org/scripts/423602-msgpack/code/msgpack.js
 // @require     https://greasyfork.org/scripts/456235-moomoo-js/code/MooMoojs.js?version=1144738
 // @grant       none
@@ -29,10 +29,10 @@ function string_to_chat_packet(s){
   return buf;
 }
 var anim=[
-  'B',
-  'E',
-  'T',
-  'A',
+  'Beta',
+  'Delta',
+  'Foxtrot',
+  'Alpha',
 ].map(s=>string_to_chat_packet('PlitsllMod siked '+s));
 var discard_message=string_to_chat_packet('[Cancelled Send]');
 var frame=0;
@@ -294,7 +294,7 @@ myElement.style.color = "#ffc4f4";
 
 
 
-document.title = "PlitsllMod v.1"
+document.title = "PlitsllMod v.2"
 var tick = 0;
 /*let newPingDisplay = document.createElement("div");
 newPingDisplay = document.getElementById("pingDisplay");
@@ -3824,19 +3824,19 @@ $("#mobileDownloadButtonContainer").hide();
     }
     var qHolding = false;
     const foodPlacer = repeater(81, () => {
-        place(R.items[0]);
+        place(R.items[150]);
         qHolding = true;
     }, 60);
-    const spikePlacer = repeater(86, () => {
+    const spikePlacer = repeater(99, () => {
         cplace(R.items[2]);
     }, 60);
-    const trapPlacer = repeater(70, () => {
+    const trapPlacer = repeater(99, () => {
         cplace(R.items[4]);
     }, 60);
-    const millPlacer = repeater(78, () => {
+    const millPlacer = repeater(99, () => {
         cplace(R.items[3]);
     }, 60);
-    const tpPlacer = repeater(72, () => {
+    const tpPlacer = repeater(99, () => {
         if(toggles.quadTurret()) {
             for(let i = 0; i < Math.PI * 2; i+=Math.PI/4) {
                 cplace(R.items[5], i);
@@ -3862,7 +3862,7 @@ $("#mobileDownloadButtonContainer").hide();
         y: 0,
     }
     var audios = [
-        new Audio("https://cdn.discordapp.com/attachments/967213871267971072/1027416621318414406/8mb.video-Vf9-wfenD0dA.m4a"),
+        new Audio("https://www.youtube.com/watch?v=kWdy2XFZvKM&list=RDaI1vdoCH4fo&index=4"),
         new Audio("https://cdn.discordapp.com/attachments/967213871267971072/1027001423034065006/DR._LOVE___DONT_STAND_SO_CLOSED_INITIAL_D.mp3"),
         new Audio("https://cdn.discordapp.com/attachments/967213871267971072/1027051825871990845/YT2mp3.info_-_Imagine_Dragons_-_Warriors_Lyrics_320kbps.mp3"),
         new Audio("https://cdn.discordapp.com/attachments/967213871267971072/1027003301465706537/Ken_Blast_-_The_Top_Lyrics_Video_Eurobeat_Initial_D_REUPLOAD.mp3"),
@@ -3879,7 +3879,7 @@ $("#mobileDownloadButtonContainer").hide();
         }else if(e == 2) {
             chats=[{chat:"As a child you would wait",delay:6e3},{chat:"And watch from far away",delay:9e3},{chat:"But you always knew",delay:12e3},{chat:"that you'd be the one",delay:14e3},{chat:"That work while they all play",delay:15e3},{chat:"In youth you'd lay",delay:18e3},{chat:"Awake at night and scheme",delay:21e3},{chat:"Of all the things",delay:24e3},{chat:"that you would change",delay:26e3},{chat:"But it was just a dream",delay:27e3},{chat:"Here we are,",delay:31e3},{chat:"Don't turn away now",delay:33e3},{chat:"We are the warriors",delay:37e3},{chat:"that built this town",delay:39e3},{chat:"Here we are",delay:43e3},{chat:"Don't turn away now",delay:45e3},{chat:"We are the warriors",delay:49e3},{chat:"that built this town",delay:51e3},{chat:"from dust",delay:55e3},{chat:"The time will come",delay:57e3},{chat:"When you'll have to rise",delay:58e3},{chat:"above the best",delay:61e3},{chat:"and prove yourself",delay:63e3},{chat:"Your spirit never dies",delay:64e3},{chat:"Farewell, I've gone",delay:67e3},{chat:"to take my throne above",delay:71e3},{chat:"But don't weep for me",delay:73e3},{chat:"Cause this will be",delay:75e3},{chat:"The labor of my love",delay:77e3},{chat:"Here we are,",delay:8e4},{chat:"Don't turn away now",delay:82e3},{chat:"We are the warriors",delay:86e3},{chat:"that built this town",delay:89e3},{chat:"Here we are",delay:92e3},{chat:"Don't turn away now",delay:94e3},{chat:"We are the warriors",delay:98e3},{chat:"that built this town",delay:101e3},{chat:"from dust",delay:104e3},{chat:"Here we are,",delay:129e3},{chat:"Don't turn away now",delay:132e3},{chat:"We are the warriors",delay:136e3},{chat:"that built this town",delay:132e3},{chat:"Here we are",delay:142e3},{chat:"Don't turn away now",delay:144e3},{chat:"We are the warriors",delay:148e3},{chat:"that built this town",delay:15e4},{chat:"from dust",delay:154e3}];
         }else if(e == 3) {
-            chats=[{chat:"Final lap",delay:39e3},{chat:"I'm on top of the world",delay:4e4},{chat:"And I will never",delay:41e3},{chat:"rest for second again!",delay:42e3},{chat:"One more time",delay:45e3},{chat:"I have beaten them out",delay:46e3},{chat:"The scent of gasoline",delay:47e3},{chat:"announces the end!",delay:49e3},{chat:"They all said",delay:51e3},{chat:"I'd best give it up",delay:52e3},{chat:"What a fool",delay:53e3},{chat:"to believe their lies!",delay:54e3},{chat:"Now they've fallen",delay:57e3},{chat:"and I'm at the top",delay:58e3},{chat:"Are you ready",delay:59e3},{chat:"now to die-ie-ie?!",delay:6e4},{chat:"I came up from the bottom,",delay:63e3},{chat:"and into the top",delay:64e3},{chat:"For the first time",delay:65e3},{chat:"I feel alive!",delay:66e3},{chat:"I can fly like an eagle,",delay:69e3},{chat:"and strike like a hawk!",delay:7e4},{chat:"Do you think you can survive",delay:72e3},{chat:"the top?",delay:75e3},{chat:"One more turn",delay:87e3},{chat:"and I'll settle the score",delay:88e3},{chat:"A rubber fire screams",delay:89e3},{chat:"into the night",delay:91e3},{chat:"Crash and burn is",delay:93e3},{chat:"what you're gonna do",delay:94e3},{chat:"I am a master of",delay:95e3},{chat:"the asphalt fight!",delay:97e3},{chat:"They all said",delay:99e3},{chat:"I'd best give it up",delay:1e5},{chat:"What a fool to",delay:101e3},{chat:"believe their lies!",delay:104e3},{chat:"Now they've fallen",delay:105e3},{chat:"and I'm at the top",delay:106e3},{chat:"Are you ready",delay:107e3},{chat:"now to die-ie-ie?!",delay:108e3},{chat:"I came up from the bottom,",delay:11e4},{chat:"and into the top",delay:112e3},{chat:"For the first time",delay:113e3},{chat:"I feel alive!",delay:114e3},{chat:"I can fly like an eagle,",delay:117e3},{chat:"and strike like a hawk!",delay:118e3},{chat:"Do you think you can survive",delay:12e4},{chat:"I came up from the bottom,",delay:123e3},{chat:"and into the top",delay:124e3},{chat:"For the first time",delay:125e3},{chat:"I feel alive!",delay:126e3},{chat:"I can fly like an eagle,",delay:129e3},{chat:"and strike like a hawk!",delay:13e4},{chat:"Do you think you can survive",delay:131e3},{chat:"the top?",delay:134e3},{chat:"I came up from the bottom,",delay:171e3},{chat:"and into the top",delay:172e3},{chat:"For the first time",delay:173e3},{chat:"I feel alive!",delay:174e3},{chat:"I can fly like an eagle,",delay:177e3},{chat:"and strike like a hawk!",delay:178e3},{chat:"Do you think you can survive",delay:18e4},{chat:"I came up from the bottom,",delay:183e3},{chat:"and into the top",delay:184e3},{chat:"For the first time",delay:185e3},{chat:"I feel alive!",delay:186e3},{chat:"I can fly like an eagle,",delay:189e3},{chat:"and strike like a hawk!",delay:19e4},{chat:"Do you think you can survive",delay:192e3},{chat:"the top?",delay:194e3},{chat:"I came up from the bottom,",delay:23e4},{chat:"and into the top",delay:232e3},{chat:"For the first time",delay:233e3},{chat:"I feel alive!",delay:234e3},{chat:"I can fly like an eagle,",delay:237e3},{chat:"and strike like a hawk!",delay:238e3},{chat:"Do you think you can survive",delay:239e3},{chat:"I came up from the bottom,",delay:243e3},{chat:"and into the top",delay:244e3},{chat:"For the first time",delay:245e3},{chat:"I feel alive!",delay:246e3},{chat:"I can fly like an eagle,",delay:249e3},{chat:"and strike like a hawk!",delay:25e4},{chat:"Do you think you can survive",delay:252e3},{chat:"the top?",delay:255e3}];
+            chats=[{chat:"I'm a Warrior mate",delay:39e3},{chat:"Can't kill me if you try",delay:4e4},{chat:"And I will never",delay:41e3},{chat:"surrender",delay:42e3},{chat:"One more time",delay:45e3},{chat:"I have slain the best",delay:46e3},{chat:"Hear the warhorn",delay:47e3},{chat:"announce your end!",delay:49e3},{chat:"quit trash talking me",delay:51e3},{chat:"if you can't eve kill me",delay:52e3},{chat:"What a fool you are",delay:53e3},{chat:"to believe you can kill me",delay:54e3},{chat:"Now you've fallen",delay:57e3},{chat:"at my feet.",delay:58e3},{chat:"Cower at my feet,",delay:59e3},{chat:"beg for mercy",delay:6e4},{chat:"And i might prolong,",delay:63e3},{chat:"your miserible life.",delay:64e3},{chat:"Send word around,",delay:65e3},{chat:"there is a new king in town",delay:66e3},{chat:"Their judgment is crashing down",delay:69e3},{chat:"no one will survive the wrath.",delay:7e4},{chat:"Run away now,",delay:72e3},{chat:"all ye' peasents.",delay:75e3},{chat:"One more day of uncertainty ",delay:87e3},{chat:"pondering your life's end.",delay:88e3},{chat:"I will bring you peace...",delay:89e3},{chat:"When your in the grave!",delay:91e3},{chat:"Cower at my feet and",delay:93e3},{chat:"beg for your miserible life.",delay:94e3},{chat:"I am a master of",delay:95e3},{chat:"Your fate!",delay:97e3},{chat:"Beg for mercy",delay:99e3},{chat:"and i will prolong",delay:1e5},{chat:"your miserable life",delay:101e3},{chat:"surrender to me now,",delay:104e3},{chat:"Pledge loyalty under my banner",delay:105e3},{chat:"serve me to your death",delay:106e3},{chat:"or die by my hand",delay:107e3},{chat:"now to die-ie-ie?!",delay:108e3},{chat:"I came up from the bottom,",delay:11e4},{chat:"and into the top",delay:112e3},{chat:"For the first time",delay:113e3},{chat:"I feel alive!",delay:114e3},{chat:"I can fly like an eagle,",delay:117e3},{chat:"and strike like a hawk!",delay:118e3},{chat:"Do you think you can survive",delay:12e4},{chat:"I came up from the bottom,",delay:123e3},{chat:"and into the top",delay:124e3},{chat:"For the first time",delay:125e3},{chat:"I feel alive!",delay:126e3},{chat:"I can fly like an eagle,",delay:129e3},{chat:"and strike like a hawk!",delay:13e4},{chat:"Do you think you can survive",delay:131e3},{chat:"the top?",delay:134e3},{chat:"I came up from the bottom,",delay:171e3},{chat:"and into the top",delay:172e3},{chat:"For the first time",delay:173e3},{chat:"I feel alive!",delay:174e3},{chat:"I can fly like an eagle,",delay:177e3},{chat:"and strike like a hawk!",delay:178e3},{chat:"Do you think you can survive",delay:18e4},{chat:"I came up from the bottom,",delay:183e3},{chat:"and into the top",delay:184e3},{chat:"For the first time",delay:185e3},{chat:"I feel alive!",delay:186e3},{chat:"I can fly like an eagle,",delay:189e3},{chat:"and strike like a hawk!",delay:19e4},{chat:"Do you think you can survive",delay:192e3},{chat:"the top?",delay:194e3},{chat:"I came up from the bottom,",delay:23e4},{chat:"and into the top",delay:232e3},{chat:"For the first time",delay:233e3},{chat:"I feel alive!",delay:234e3},{chat:"I can fly like an eagle,",delay:237e3},{chat:"and strike like a hawk!",delay:238e3},{chat:"Do you think you can survive",delay:239e3},{chat:"I came up from the bottom,",delay:243e3},{chat:"and into the top",delay:244e3},{chat:"For the first time",delay:245e3},{chat:"I feel alive!",delay:246e3},{chat:"I can fly like an eagle,",delay:249e3},{chat:"and strike like a hawk!",delay:25e4},{chat:"Do you think you can survive",delay:252e3},{chat:"the top?",delay:255e3}];
         }else if(e == 4) {
             chats=[{chat:"Love Sosa",delay:7e3},{chat:"bitches love Sosa, huh?",delay:10e3},{chat:"O End or no end",delay:14e3},{chat:"Raris and Rovers",delay:16e3},{chat:"Ayy, li'l Cobra, ayy, ayy",delay:18e3},{chat:"Bang, Bang-bang",delay:27e3},{chat:"God, y'all some broke boys",delay:29e3},{chat:"God, y'all some broke boys",delay:30e3},{chat:"These bitches love Sosa",delay:32e3},{chat:"O End or no end",delay:34e3},{chat:"Fuckin' with them O boys",delay:36e3},{chat:"you gon' get fucked over",delay:38e3},{chat:"'Raris and Rovers",delay:40e3},{chat:"these hoes love Chief Sosa",delay:42e3},{chat:"Hit him with that cobra",delay:43e3},{chat:"now that boy slumped over",delay:45e3},{chat:"They do it all for Sosa",delay:47e3},{chat:"you boys ain't making no noise",delay:49e3},{chat:"Y'all know I'm a grown boy",delay:51e3},{chat:"your clique full of broke boys",delay:53e3},{chat:"God, y'all some broke boys",delay:55e3},{chat:"God, y'all some broke boys",delay:56e3},{chat:"We GBE dope boys,",delay:58e3},{chat:"we got lots of dough, boy",delay:60e3},{chat:"These bitches love Sosa",delay:62e3},{chat:"and they love them Glo Boys",delay:64e3},{chat:"Know we from the 'Go boy",delay:65e3},{chat:"but we cannot go, boy",delay:67e3},{chat:"No, I don't know old boy",delay:69e3},{chat:"I know he's a broke boy",delay:71e3},{chat:"'Raris and Rovers,",delay:73e3},{chat:"convertible Lambos, boy",delay:74e3},{chat:"You know I got bands, boy,",delay:76e3},{chat:"and it's in my pants, boy",delay:78e3},{chat:"Disrespect them O Boys,",delay:80e3},{chat:"you won't speak again, boy",delay:82e3},{chat:"Don't think that I'm playin', boy",delay:84e3},{chat:"no, we don't use hands, boy",delay:85e3},{chat:"No, we don't do friends, boy,",delay:87e3},{chat:"collect bands, I'm a landlord",delay:89e3},{chat:"I gets lots of commas,",delay:91e3},{chat:"I can fuck your momma",delay:92e3},{chat:"I ain't with the drama,",delay:94e3},{chat:"you can meet my llama",delay:96e3},{chat:"Ridin' with 3hunna,",delay:98e3},{chat:"with three hundred foreigns",delay:94e3},{chat:"These bitches see Chief Sosa",delay:102e3},{chat:"I swear to God, they honored",delay:104e3},{chat:"These bitches love Sosa",delay:105e3},{chat:"O End or no end",delay:107e3},{chat:"Fuckin' with them O boys",delay:109e3},{chat:"you gon' get fucked over",delay:110e3},{chat:"'Raris and Rovers",delay:112e3},{chat:"these hoes love Chief Sosa",delay:114e3},{chat:"Hit him with that cobra",delay:116e3},{chat:"now that boy slumped over",delay:118e3},{chat:"They do it all for Sosa",delay:120e3},{chat:"you boys ain't making no noise",delay:121e3},{chat:"Y'all know I'm a grown boy",delay:123e3},{chat:"your clique full of broke boys",delay:125e3},{chat:"God, y'all some broke boys",delay:127e3},{chat:"God, y'all some broke boys",delay:128e3},{chat:"We GBE dope boys",delay:130e3},{chat:"we got lots of dough, boy",delay:132e3},{chat:"Don't make me call D. Rose",delay:135e3},{chat:"boy, he six double-O, boy",delay:136e3},{chat:"And he keep that pole, boy",delay:138e3},{chat:"you gon' get fucked over",delay:140e3},{chat:"Bitch, I done sell soda",delay:142e3},{chat:"and I done sell coca",delay:144e3},{chat:"She gon' clap for Sosa",delay:145e3},{chat:"he gon' clap for Sosa",delay:147e3},{chat:"They do it for Sosa, them hoes",delay:149e3},{chat:"they do it for Sosa",delay:150e3},{chat:"Tadoe off the molly water",delay:152e3},{chat:"so nigga be cool like water",delay:154e3},{chat:"Fore you get hit with thislava",delay:156e3},{chat:"bitch, I'm the trending topic",delay:158e3},{chat:"These bitches love Sosa",delay:163e3},{chat:"O End or no end",delay:165e3},{chat:"Fuckin' with them O boys",delay:167e3},{chat:"you gon' get fucked over",delay:169e3},{chat:"'Raris and Rovers",delay:170e3},{chat:"these hoes love Chief Sosa",delay:172e3},{chat:"Hit him with that cobra",delay:174e3},{chat:"now that boy slumped over",delay:176e3},{chat:"They do it all for Sosa",delay:178e3},{chat:"you boys ain't making no noise",delay:180e3},{chat:"Y'all know I'm a grown boy",delay:182e3},{chat:"your clique full of broke boys",delay:184e3},{chat:"God, y'all some broke boys",delay:185e3},{chat:"God, y'all some broke boys",delay:187e3},{chat:"We GBE dope boys",delay:189e3},{chat:"we got lots of dough, boy",delay:191e3}];
         }else if(e == 5) {
@@ -4053,7 +4053,7 @@ $("#mobileDownloadButtonContainer").hide();
     var An = 99999;
     function Pn() {
         le = !1;
-        Ge.innerHTML = R.shameCount < 5 ? "BREH" : "Breh";
+        Ge.innerHTML = R.shameCount < 5 ? "Stop It" : "Stop It ";
         Be.style.display = "none",
         Qt(),
         It = {
