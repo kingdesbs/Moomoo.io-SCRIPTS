@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Troll Mode v4
+// @name         Bully Legacy v4
 // @description  finished
 // @version      v4
 // @match        *://*.moomoo.io/*
@@ -12060,8 +12060,8 @@ $('#scoreDisplay').css({'color': '#e8fff5'});
 document.getElementById("ageText").style.color = "#26ffa1";
 document.getElementById('adCard').remove();
 document.getElementById('errorNotification').remove();
-document.getElementById('gameName').innerHTML = '𝓣𝓻𝓸𝓵𝓵 𝓜𝓸𝓭𝓮';
-document.getElementById('enterGame').innerHTML = '☯P̷̥̺̮̫̬͈̝͗̚͜L̴̫͙̼͛́̂̀̀̚͜A̸̡̘͕̓̈́̋̐͝Y̸̞̻͇͙͌☯';
+document.getElementById('gameName').innerHTML = '𝕭𝖚𝖑𝖑𝖞 𝕷𝖊𝖌𝖆𝖈𝖞';
+document.getElementById('enterGame').innerHTML = '☯ℙ𝕃𝔸𝕐☯';
 document.getElementById('diedText').innerHTML = '𝕲𝖊𝖙 𝖊𝖒 𝖓𝖊𝖝𝖙 𝖙𝖎𝖒𝖊';
 $('#ageBar').css({'-webkit-border-radius': '0px',
                   '-moz-border-radius': '0px',
