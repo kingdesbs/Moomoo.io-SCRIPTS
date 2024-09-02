@@ -16,7 +16,7 @@
 TODO:
 building death prediction for faster autoplace
 onetick
-normal insta
+OP insta
 
 CONTROLS:
 g to farm ur kat up
@@ -25,6 +25,11 @@ u can use f v and q for fun
 left click for bullspam
 (i use that alot ^)
 */
+f=trap
+v=nearSpikes
+r=insta
+h=turret
+z=triplemills
 
 const {
     sin
